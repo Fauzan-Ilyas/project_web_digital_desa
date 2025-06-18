@@ -15,6 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             EventSeeder::class
+        // User::factory(10)->create();
+
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        $this->call([
+            UserSeeder::class,
+            HeadOfFamilySeeder::class,
         ]);
 
         // User::factory()->create([
