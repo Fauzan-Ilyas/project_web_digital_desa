@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\SocialAssistanceRecipientRepositoryInterface;
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\SocialAssistanceRecipientStoreRequest;
+use App\Http\Requests\SocialAssistanceRecipientUpdateRequest;
 use App\Http\Resources\SocialAssistanceRecipientResource;
 use App\Models\SocialAssistance;
 use Illuminate\Http\Request;
@@ -39,7 +41,7 @@ class SocialAssistanceRecipientsController extends Controller
 
     public function getAllPAginated(Request $request)
     {
-        $request = $request->validate([
+        $request = $request->validated([
             'search' => 'nullable|string',
             'row_per_page' => 'nullable|integer'
         ]);
@@ -60,9 +62,17 @@ class SocialAssistanceRecipientsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SocialAssistanceRecipientStoreRequest $request)
     {
-        //
+        $request = $request->validated();
+
+        try {
+            $socialAssistanceRecipients = $this->socialAssistanceRecipientRepository->create($request);
+
+            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Dibuat', SocialAssistanceRecipientResource::make($socialAssistanceRecipients), 200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
     /**
@@ -70,15 +80,46 @@ class SocialAssistanceRecipientsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $socialAssistanceRecipient = $this->socialAssistanceRecipientRepository->getById(
+                $id
+            );
+
+            if(!$socialAssistanceRecipient){
+                return ResponseHelper::jsonResponse(false, 'Data Penerima Bantuan Sosial Tidak Ditemukan', null, 404);
+            }
+
+            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Ditemukan', new SocialAssistanceRecipientResource($socialAssistanceRecipient), 200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SocialAssistanceRecipientUpdateRequest $request, string $id)
     {
-        //
+        $request = $request->validated();
+
+        try {
+            $socialAssistanceRecipient = $this->socialAssistanceRecipientRepository->getById(
+                $id
+            );
+
+            if (!$socialAssistanceRecipient) {
+                return ResponseHelper::jsonResponse(false, 'Data Penerima Bantuan Sosial Tidak Ditemukan', null, 404);
+            }
+
+            $socialAssistanceRecipient = $this->socialAssistanceRecipientRepository->update(
+                $id,
+                $request
+            );
+
+            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Diupdate', SocialAssistanceRecipientResource::make($socialAssistanceRecipient), 200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
     /**
@@ -86,6 +127,24 @@ class SocialAssistanceRecipientsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        try {
+            $socialAssistanceRecipient = $this->socialAssistanceRecipientRepository->getById(
+                $id
+            );
+
+            if (!$socialAssistanceRecipient) {
+                return ResponseHelper::jsonResponse(false, 'Data Penerima Bantuan Sosial Tidak Ditemukan', null, 404);
+            }
+
+            $socialAssistanceRecipient = $this->socialAssistanceRecipientRepository->delete(
+                $id
+            );
+
+            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Dihapus', SocialAssistanceRecipientResource::make($socialAssistanceRecipient), 200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 }
+

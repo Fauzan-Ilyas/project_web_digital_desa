@@ -19,7 +19,7 @@ class SocialAssistanceRecipient extends Model
         'bank',
         'account_number',
         'proof',
-        'status',
+        'status'
     ];
 
     public function scopeSearch($query, $search)

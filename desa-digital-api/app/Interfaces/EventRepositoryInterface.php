@@ -2,17 +2,21 @@
 
 namespace App\Interfaces;
 
-interface SocialAssistanceRecipientRepositoryInterface
+interface EventRepositoryInterface
 {
     public function getAll(
         ?string $search,
-        ?int $limit,
+        ?string $limit,
         bool $execute
     );
 
     public function getAllPaginated(
         ?string $search,
-        ?int $rowsPerPage,
+        ?int $rowPerPage
+    );
+
+    public function getById(
+        string $id
     );
 
     public function create(
