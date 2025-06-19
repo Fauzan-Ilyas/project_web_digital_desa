@@ -22,8 +22,8 @@ class HeadOfFamilyFactory extends Factory
             'gender' => $this->faker->randomElement(['male', 'female']),
             'date_of_birth' => $this->faker->dateTimeBetween('-60 years', 'now'),
             'phone_number' => $this->faker->unique()->phoneNumber(),
-            'accupation' => $this->faker->jobTitle(),
-            'marital_status' => $this->faker->randomElement(['Married', 'Single'])
+            'occupation' => $this->faker->jobTitle(),
+            'martial_status' => $this->faker->randomElement(['married', 'single']),
         ];
     }
 }

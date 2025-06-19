@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class SocialAssistance extends Model
 {
-    use SoftDeletes, UUID;
+    use HasFactory, SoftDeletes, UUID;
 
     protected $fillable = [
         'thumbnail',
