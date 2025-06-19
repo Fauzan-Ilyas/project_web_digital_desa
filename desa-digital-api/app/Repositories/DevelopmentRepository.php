@@ -2,21 +2,22 @@
 
 namespace App\Repositories;
 
-use App\Interfaces\SocialAssistanceRepositoryInterface;
-use App\Models\SocialAssistance;
+use App\Interfaces\DevelopmentRepositoryInterface;
 
-class SocialAssistanceRepository implements SocialAssistanceRepositoryInterface
-{
+class DevelopmentRepository implements DevelopmentRepositoryInterface {
+
     public function getAll(
         ?string $search,
-        ?int $limit,
+        ?string $limit,
         bool $execute
     ) {
-        $query = SocialAssistance::where( function ($query) use ($search) {
-            if ($search) {
-                $query->search($search);
-            }
+        $query = Event::where(function ($query) use ($search) {
+           if ($search) {
+               $query->search($search);
+           } 
         });
+
+        $query->orderBy('created_at', 'desc');
 
         if ($limit) {
             $query->take($limit);

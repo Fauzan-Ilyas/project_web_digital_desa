@@ -1,33 +1,17 @@
 <?php
 
-
-
 namespace Database\Seeders;
 
-
-
+use Database\Factories\EventFactory;
 use Illuminate\Database\Seeder;
 
-use App\Models\User;
-
-
-
-class UserSeeder extends Seeder
-
+class EventSeeder extends Seeder
 {
-
     /**
-
      * Run the database seeds.
-
      */
-
     public function run(): void
-
     {
-
-        User::factory()->count(15)->create();
-
+        EventFactory::new()->count(10)->create();
     }
-
 }

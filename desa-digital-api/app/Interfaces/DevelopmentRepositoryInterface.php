@@ -2,17 +2,16 @@
 
 namespace App\Interfaces;
 
-interface SocialAssistanceRepositoryInterface
+interface DevelopmentRepositoryInterface 
 {
     public function getAll(
         ?string $search,
-        ?int $limit,
+        ?string $limit,
         bool $execute
     );
 
     public function getAllPaginated(
         ?string $search,
-        ?int $rowsPerPage
+        ?int $rowPerPage
     );
 }
-
