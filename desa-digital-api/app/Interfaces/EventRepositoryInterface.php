@@ -1,14 +1,14 @@
-<?php 
+<?php
 
 namespace App\Interfaces;
 
-interface HeadOfFamilyRepositoryInterface                 
+interface EventRepositoryInterface
 {
     public function getAll(
         ?string $search,
-        ?int $limit,
+        ?string $limit,
         bool $execute
-    ); 
+    );
 
     public function getAllPaginated(
         ?string $search,
