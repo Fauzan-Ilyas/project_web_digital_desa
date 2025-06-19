@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('thumbnail');
+            $table->string('name');
+            $table->longText('about');
+            $table->string('headman');
+            $table->integer('people');
+            $table->decimal('agricultural_area', 16, 4);
+            $table->decimal('total_area', 16, 4);
             $table->softDeletes();
             $table->timestamps();
         });
