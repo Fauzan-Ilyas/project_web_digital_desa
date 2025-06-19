@@ -23,9 +23,15 @@ class FamilyMemberController extends Controller
     public function index(Request $request)
     {
         try {
-            $familyMembers
+            $familyMembers = $this->familyMemberRepository->getAll(
+                $request->search,
+                $request->limit,
+                true
+            );
+
+            return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Diambil', FamilyMemberResource::collection($familyMember), 200);
         } catch (\Exception $e) {
-            //throw $th;
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
         }
     }
 

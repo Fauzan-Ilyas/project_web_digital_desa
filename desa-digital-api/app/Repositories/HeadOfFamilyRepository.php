@@ -19,7 +19,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
             }
         });
 
-        $query->orderBy('created_at', 'desc'); pepek 
+        $query->orderBy('created_at', 'desc');
 
         if ($limit) {
             $query->take($limit); // ambil sejumlah data berdasarkan limit
