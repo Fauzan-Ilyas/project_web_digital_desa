@@ -4,6 +4,7 @@
 
 use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use App\Models\HeadOfFamily; // pastikan model ini benar
+use App\Repositories\UserRepository;
 
 class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
 {

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DevelopmentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\SocialAssistanceRecipientsController;
 
@@ -8,3 +9,6 @@ Route::get('social-assistance-recipient/all/paginated', [SocialAssistanceRecipie
 
 Route::apiResource('event', EventController::class);
 Route::get('event/all/paginated', [EventController::class, 'getAllPaginated']);
+
+Route::apiResource('development', DevelopmentController::class);
+Route::get('development/all/paginated', [DevelopmentController::class, 'getAllPaginated']);
