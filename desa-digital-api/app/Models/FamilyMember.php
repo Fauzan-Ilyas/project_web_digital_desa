@@ -19,7 +19,8 @@ class FamilyMember extends Model
         'date_of_birth',
         'phone_number',
         'occupation',
-        'marital_status'
+        'marital_status',
+        'relation'
     ];
 
     public function scopeSearch($query, $search)

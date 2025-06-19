@@ -16,14 +16,15 @@ class HeadOfFamilyResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user' => new UserResource($this->user),
+            'user' => new UserResource($this->whenLoaded('user')),
             'profile_picture' => $this->profile_picture,
             'identity_number' => $this->identity_number,
             'gender' => $this->gender,
             'date_of_birth' => $this->date_of_birth,
             'phone_number' => $this->phone_number,
             'accupation' => $this->accupation,
-            'marital_status' => $this->marital_status
+            'marital_status' => $this->marital_status,
+            'family_members' => FamilyMemberResource::collection($this->familyMembers)
         ];
     }
 }
