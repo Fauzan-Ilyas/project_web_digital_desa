@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class EventParticipants extends Model
 {
-    use SoftDeletes, UUID;
+    use HasFactory, SoftDeletes, UUID;
 
     protected $fillable = [
         'event_id',
@@ -16,6 +16,11 @@ class EventParticipants extends Model
         'quantity',
         'total_price',
         'payment_status',
+    ];
+
+    protected $casts = [
+        'quantity' => 'integer',
+        'total_price' => 'decimal:2',
     ];
 
     public function scopeSearch($query, $search)
