@@ -27,3 +27,7 @@ Route::get('event/all/paginated', [EventController::class, 'getAllPaginated']);
 
 Route::apiResource('development', DevelopmentController::class);
 Route::get('development/all/paginated', [DevelopmentController::class, 'getAllPaginated']);
+
+Route::apiResource('event-participant', EvenParticipantController::class);
+Route::get('event-participant/all/paginated', [evenParticipantController::class, 'getAllPaginated']);
+

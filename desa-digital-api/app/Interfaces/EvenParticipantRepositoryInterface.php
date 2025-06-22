@@ -2,15 +2,15 @@
 
 namespace App\Interfaces;
 
-interface DevelopmentRepositoryInterface 
+interface EvenParticipantRepositoryInterface
 {
     public function getAll(
         ?string $search,
-        ?string $limit,
+        ?int $limit,
         bool $execute
     );
 
-    public function getAllPaginated(
+    public function getAllPaginate(
         ?string $search,
         ?int $rowPerPage
     );

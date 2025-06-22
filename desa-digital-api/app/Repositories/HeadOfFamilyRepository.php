@@ -2,6 +2,7 @@
 
 // namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use App\Models\HeadOfFamily; // pastikan model ini benar
 use App\Repositories\UserRepository;
@@ -130,7 +131,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
     public function delete(
         string $id
         ) {
-            BD::beginTransaction();
+            DB::beginTransaction();
             try {
                 $headOfFamily = HeadOfFamily::find($id);
                 $headOfFamily->delete();

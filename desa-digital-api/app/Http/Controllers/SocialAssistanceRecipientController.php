@@ -7,10 +7,8 @@ use App\Helpers\ResponseHelper;
 use App\Http\Requests\SocialAssistanceRecipientStoreRequest;
 use App\Http\Requests\SocialAssistanceRecipientUpdateRequest;
 use App\Http\Resources\SocialAssistanceRecipientResource;
-use App\Models\SocialAssistance;
+use App\Http\Resources\PaginateResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
-use PhpParser\Node\Stmt\TryCatch;
 
 class SocialAssistanceRecipientsController extends Controller
 {
@@ -53,7 +51,7 @@ class SocialAssistanceRecipientsController extends Controller
                 true
             );
 
-            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Diambil', PaginatedResource::make($socialAssistanceRecipients, SocialAssistanceRecipientResource), 200);
+            return ResponseHelper::jsonResponse(true, 'Data Penerima Bantuan Sosial Berhasil Diambil',new PaginateResource($socialAssistanceRecipients, SocialAssistanceRecipientResource::class), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
