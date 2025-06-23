@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Interfaces\SocialAssistanceRecipientRepositoryInterface;
 use App\Models\SocialAssistanceRecipient;
-use Exeception;
+use Exception;
 use Illuminate\Support\Facades\DB;
 
 class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRepositoryInterface {
@@ -73,10 +73,10 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
             DB::commit();
 
             return $socialAssistanceRecipient;
-        } catch (\Exeception $e) {
-            DB::roolBack();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-            throw new Exeception($e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -106,10 +106,10 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
             DB::commit();
 
             return $socialAssistanceRecipient;
-        } catch (\Exeception $e) {
-            DB::roolBack();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-            throw new Exeception($e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 
@@ -125,10 +125,10 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
             DB::commit();
 
             return $socialAssistanceRecipient;
-        } catch (\Exeception $e) {
-            DB::roolBack();
+        } catch (\Exception $e) {
+            DB::rollBack();
 
-            throw new Exeception($e->getMessage());
+            throw new Exception($e->getMessage());
         }
     }
 }

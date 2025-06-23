@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
+
   public function run(): void
   {
       $this->call([
@@ -24,5 +25,23 @@ class DatabaseSeeder extends Seeder
           DevelopmentApplicant::class
       ]);
   }
+
+    public function run(): void
+    {
+        // User::factory(10)->create();
+
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+
+        $this->call([
+            UserSeeder::class,
+            HeadOfFamilySeeder::class,
+            SocialAssistanceSeeder::class,
+            EventSeeder::class,
+            EventParticipantSeeder::class
+        ]);
+    }
 }
  

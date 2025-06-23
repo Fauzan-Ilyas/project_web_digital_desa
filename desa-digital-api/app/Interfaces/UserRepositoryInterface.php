@@ -31,9 +31,5 @@ interface UserRepositoryInterface
     public function delete(
         string $id
     );
-// <<<<<<< api_family_member
-// }
+}
 
-// =======
-// } 
-// >>>>>>> main

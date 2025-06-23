@@ -7,7 +7,7 @@ use App\Helpers\ResponseHelper;
 use App\Http\Requests\EventUpdateRequest;
 use App\Http\Resources\EventResource;
 use App\Interfaces\EventRepositoryInterface;
-use App\Http\Resources\PaginatedResource;
+use App\Http\Resources\PaginateResource;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -49,7 +49,7 @@ class EventController extends Controller
                 $request['row_per_page'],
             );
 
-            return ResponseHelper::jsonResponse(true, 'Data Event Berhasil Diambil', PaginatedResource::make($events, EventResource::class), 200);
+            return ResponseHelper::jsonResponse(true, 'Data Event Berhasil Diambil', PaginateResource::make($events, EventResource::class), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Event;
 use App\Interfaces\EventRepositoryInterface;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class EventRepository implements EventRepositoryInterface
 {

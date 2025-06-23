@@ -15,7 +15,7 @@ interface DevelopmentRepositoryInterface
         ?int $rowPerPage
     );
 
-    public function getById (
+    public function getById(
         string $id
     );
 
@@ -28,7 +28,7 @@ interface DevelopmentRepositoryInterface
         array $data
     );
 
-    public function delete (
+    public function delete(
         string $id
     );
 }

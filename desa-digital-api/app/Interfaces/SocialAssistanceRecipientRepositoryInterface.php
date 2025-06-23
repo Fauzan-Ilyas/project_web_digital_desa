@@ -12,7 +12,11 @@ interface SocialAssistanceRecipientRepositoryInterface
 
     public function getAllPaginated(
         ?string $search,
-        ?int $rowsPerPage,
+        ?int $rowsPerPage
+    );
+
+    public function getById(
+        string $id
     );
 
     public function create(
