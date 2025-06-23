@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FamilyMemberController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\DevelopmentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventParticipantController;
 use App\Http\Controllers\DevelopmentApplicantController;
+
 
 
 Route::apiResource('user', UserController::class);
@@ -32,8 +34,8 @@ Route::get('social-assistance-recipient/all/paginated', [SocialAssistanceRecipie
 Route::apiResource('event', EventController::class);
 Route::get('event/all/paginated', [EventController::class, 'getAllPaginated']);
 
-Route::apiResource('event-participant', EventParticipantController::class);
-Route::get('event-participant/all/paginated', [EventParticipantController::class, 'getAllPaginated']);
+Route::apiResource('event-participant', EvenParticipantController::class);
+Route::get('event-participant/all/paginated', [evenParticipantController::class, 'getAllPaginated']);
 
 Route::apiResource('development', DevelopmentController::class);
 Route::get('development/all/paginated', [DevelopmentController::class, 'getAllPaginated']);
@@ -44,3 +46,4 @@ Route::get('development-applicant/all/paginated', [DevelopmentApplicantControlle
 Route::get('profile', [ProfileController::class, 'index']);
 Route::post('profile', [ProfileController::class, 'store']);
 Route::put('profile', [ProfileController::class, 'update']);
+

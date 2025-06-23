@@ -32,3 +32,4 @@ interface UserRepositoryInterface
         string $id
     );
 }
+
