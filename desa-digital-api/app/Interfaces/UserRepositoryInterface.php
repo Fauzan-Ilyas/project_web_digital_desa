@@ -31,4 +31,4 @@ interface UserRepositoryInterface
     public function delete(
         string $id
     );
-} 
+}
