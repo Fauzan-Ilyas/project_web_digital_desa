@@ -16,8 +16,8 @@ class HeadOfFamilyStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'identy_number' => 'required|integer',

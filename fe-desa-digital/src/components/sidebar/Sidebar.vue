@@ -1,3 +1,16 @@
+
+import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg'
+import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg'
+
+,
+{
+    label: 'Kepala Rumah',
+    path: '/head-of-family',
+    iconActive: iconCrownInactive,
+    iconInactive: iconCrownActive,
+},
+
+
 <template>
     <aside id="Sidebar" class="relative flex w-[280px] shrink-0 min-h-screen bg-white border-r border-desa-foreshadow overflow-hidden">
                 <div class="fixed top-0 h-full w-[280px] flex shrink-0 flex-1 z-20 bg-white">
