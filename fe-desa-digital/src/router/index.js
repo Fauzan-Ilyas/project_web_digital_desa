@@ -5,9 +5,13 @@ import Auth from '@/layouts/Auth.vue'
 import Main from '@/layouts/Main.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Login from '@/views/Login.vue'
+
 import HeadOfFamilies from '@/views/head-of-family/HeadOfFamilies.vue'
 import HeadOfFamily from '@/views/head-of-family/HeadOfFamily.vue'
 import HeadOfFamilyCreate from '@/views/head-of-family/HeadOfFamilyCreate.vue'
+import Developments from '@/views/development/Developments.vue'
+import Profile from '@/views/profile/Profile.vue'
+import ProfileCreate from '@/views/profile/ProfileCreate.vue'
 
 // tambahan error views
 import Error403 from '@/views/Error403.vue'
@@ -47,14 +51,20 @@ const router = createRouter({
         {
           path: 'profile',
           name: 'profile',
-          component: 'Profile',
+          component: Profile,
           meta: { requiresAuth: true, permission: 'profile-menu' }
         },
         {
           path: 'profile/create',
           name: 'create-profile',
-          component: 'ProfileProfile',
+          component: ProfileCreate,
           meta: { requiresAuth: true, permission: 'profile-create' }
+        },
+        {
+          path: 'development',
+          name: 'Development',
+          component: Developments,
+          meta: { requiresAuth: true, permission: 'development-list' }
         }
       ]
     },
@@ -71,7 +81,7 @@ const router = createRouter({
       ]
     },
     {
-      path: '/403',
+      path: '/forbidden',
       name: 'Error 403',
       component: Error403
     },
