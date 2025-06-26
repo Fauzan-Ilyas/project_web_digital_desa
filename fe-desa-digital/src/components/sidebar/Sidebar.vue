@@ -8,6 +8,8 @@ import iconChartInactive from '@/assets/images/icons/chart-square-secondary-gree
 // Icon Kepala Rumah
 import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg'
 import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg'
+import iconBuilding4Active from '@/assets/images/icons/building-4-dark-green.svg'
+import iconBuilding4Inactive from '@/assets/images/icons/building-4-secondary-green.svg'
 
 const sidebarItems = [
   {
@@ -21,8 +23,14 @@ const sidebarItems = [
     path: '/head-of-family',
     iconActive: iconCrownInactive,
     iconInactive: iconCrownActive
-  }
-]
+  },
+   {
+    label: 'Profile Desa',
+    path: '/profile',
+    iconActive: iconBuilding4Active,
+    iconInactive: iconBuilding4Inactive,
+  };
+];
 </script>
 
 <template>

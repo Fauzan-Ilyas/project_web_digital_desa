@@ -44,6 +44,18 @@ const router = createRouter({
           component: HeadOfFamilyCreate,
           meta: { requiresAuth: true, permission: 'head-of-family-create' },
         },
+        {
+          path: 'profile',
+          name: 'profile',
+          component: 'Profile',
+          meta: { requiresAuth: true, permission: 'profile-menu' }
+        },
+        {
+          path: 'profile/create',
+          name: 'create-profile',
+          component: 'ProfileProfile',
+          meta: { requiresAuth: true, permission: 'profile-create' }
+        }
       ]
     },
     {
