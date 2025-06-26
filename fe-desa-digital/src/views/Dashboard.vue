@@ -19,7 +19,7 @@ const getResidentStatistic = () => {
           '#34613A',
           '#8EBD55',
           '#FA7139',
-          '#FBAD48',
+          '#FBAD48',          
         ],
       }]
     },

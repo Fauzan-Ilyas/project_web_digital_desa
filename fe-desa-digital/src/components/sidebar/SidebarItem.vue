@@ -48,7 +48,7 @@ watch(isChildActive, (newValue) => {
       </div>
       <!-- Fallback jika tidak ada icon -->
       <div v-else class="size-6 shrink-0 bg-gray-200 rounded flex items-center justify-center">
-        <span class="text-xs text-gray-500">?</span>
+        <span class="text-xs text-gray-500"></span>
       </div>
       
       <span
@@ -83,7 +83,7 @@ watch(isChildActive, (newValue) => {
         </div>
         <!-- Fallback jika tidak ada icon -->
         <div v-else class="size-6 shrink-0 bg-gray-200 rounded flex items-center justify-center">
-          <span class="text-xs text-gray-500">?</span>
+          <span class="text-xs text-gray-500"></span>
         </div>
         
         <span

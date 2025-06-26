@@ -2,6 +2,8 @@
 import SidebarItem from './SidebarItem.vue';
 import iconChartActive from '@/assets/images/icons/chart-square-dark-green.svg';
 import iconChartInactive from '@/assets/images/icons/chart-square-secondary-green.svg';
+import iconBagActive from '@/assets/images/icons/bag-2-dark-green.svg';
+import iconBagInactive from '@/assets/images/icons/bag-2-secondary-green.svg';
 
 const sidebarItems = [
     {
@@ -9,6 +11,34 @@ const sidebarItems = [
         path: '/',
         iconActive: iconChartActive,
         iconInactive: iconChartInactive
+    },
+    {
+        label: 'Bantuan Sosial',
+        path: '',
+        iconActive: iconBagActive,
+        iconInactive: iconBagInactive,
+        children: [
+            {
+                label: 'List Bansos',
+                path: '/social-assistance',
+            },
+            {
+                label: 'Pengajuan Bansos',
+                path: '/social-assistance-recipient'
+            }
+        ]
+    },
+    {
+        label: 'Jadwal Desa',
+        path: '',
+        iconActive: iconBagActive,
+        iconInactive: iconBagInactive,
+        children: [
+            {
+                label: 'Pembangunan',
+                path: '/development'
+            }
+        ]
     }
 ];
 </script>

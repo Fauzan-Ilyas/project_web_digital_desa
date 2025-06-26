@@ -5,6 +5,7 @@ import Auth from '@/layouts/Auth.vue'
 import Main from '@/layouts/Main.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Login from '@/views/Login.vue'
+import Developments from '@/views/development/Developments.vue'
 
 // tambahan error views
 import Error403 from '@/views/Error403.vue'
@@ -21,10 +22,22 @@ const router = createRouter({
           path: '',
           name: 'dashboard',
           component: Dashboard,
-          meta: { requiresAuth: true, permission: 'dashboard-menu' }
+          meta: { requiresAuth: true }
         }
       ]
     },
+    // {
+    //   path: '',
+    //   component: lol,
+    //   children: [
+    //     {
+    //       path: 'development',
+    //       name: 'development',
+    //       component: Developments,
+    //       meta: { requiresAuth: true, permission: 'development-list' }
+    //     }
+    //   ]
+    // },
     {
       path: '/login',
       component: Auth,
@@ -38,7 +51,8 @@ const router = createRouter({
       ]
     },
     {
-      path: '/403',
+      path: '/forbidden',
+      // path: '/403',
       name: 'Error 403',
       component: Error403
     },
@@ -46,6 +60,11 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: NotFound
+    },
+    {
+      path: '/development',
+      name: 'Development',
+      component: Developments
     }
   ]
 })
