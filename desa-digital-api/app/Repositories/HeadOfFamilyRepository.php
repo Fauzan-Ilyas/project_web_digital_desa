@@ -1,10 +1,11 @@
- <?php
+<?php
 
-// namespace App\Repositories;
+namespace App\Repositories;
 
 use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use App\Models\HeadOfFamily; // pastikan model ini benar
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\DB;
 
 class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
 {
@@ -12,21 +13,23 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
         ?string $search,
         ?int $limit, 
         bool $execute
-    ) {
-        $query = HeadOfFamily::where(function ($query) use ($search) {
-            // Jika ada parameter search, lakukan pencarian berdasarkan scope search
-            if ($search) {
+    ){
+        $query = HeadOfFamily::where (function ($query) use ($search){
+
+            // jika ada parameter search dia akan melakukan search, yang kita definisikan pada model user
+            if($search){
                 $query->search($search);
             }
         });
 
-        $query->orderBy('created_at', 'desc');
+        $query->orderBy('created_at', 'desc'); 
 
-        if ($limit) {
-            $query->take($limit); 
+        if($limit){
+            // take adalah mengambil beberapa berdasarkan limit
+            $query->take($limit);
         }
 
-        if ($execute) {
+        if($execute){
             return $query->get();
         }
 
@@ -34,16 +37,16 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
     }
 
     public function getAllPaginated(
-        ?string $search,
+        ?string $search, 
         ?int $rowPerPage
-    ) {
+    ){
         $query = $this->getAll(
             $search,
             $rowPerPage,
-            false // jangan langsung eksekusi, biarkan paginate yang eksekusi
+            false
         );
 
-        return $query->paginate($rowPerPage); // fallback jika null
+        return $query->paginate($rowPerPage);
     }
 
     public function getById(
@@ -70,7 +73,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
             $headOfFamily = new HeadOfFamily;
             $headOfFamily->user_id = $user->id;
             $headOfFamily->profile_picture = $data['profile_picture']->store('assets/head-of-families', 'public');
-            $headOfFamily->identy_number = $data['identy_number'];
+            $headOfFamily->identity_number = $data['identity_number'];
             $headOfFamily->gender = $data['gender'];
             $headOfFamily->date_of_birth = $data['date_of_birth'];
             $headOfFamily->phone_number = $data['phone_number'];
@@ -84,7 +87,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
         } catch (\Exception $e) {
             DB::rollBack();
 
-            throw new Exception ($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
@@ -100,7 +103,7 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
                     $headOfFamily->profile_picture = $data['profile_picture']->store('assets/head-of-families', 'public');
                 }
 
-                $headOfFamily->identy_number = $data['identy_number'];
+                $headOfFamily->identity_number = $data['identity_number'];
                 $headOfFamily->gender = $data['gender'];
                 $headOfFamily->date_of_birth = $data['date_of_birth'];
                 $headOfFamily->phone_number = $data['phone_number'];
@@ -122,15 +125,14 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
             } catch (\Exception $e) {
                 DB::rollBack();
 
-                throw new Exception ($e->getMessage());
+                throw new \Exception ($e->getMessage());
             }
         }
-
-
-    public function delete(
+        
+        public function delete(
         string $id
         ) {
-            BD::beginTransaction();
+            DB::beginTransaction();
             try {
                 $headOfFamily = HeadOfFamily::find($id);
                 $headOfFamily->delete();
@@ -141,7 +143,8 @@ class HeadOfFamilyRepository implements HeadOfFamilyRepositoryInterface
             } catch (\Exception $e) {
                 DB::rollBack();
 
-                throw new Exception ($e->getMessage());
+                throw new \Exception ($e->getMessage());
             }
         }
+
 }

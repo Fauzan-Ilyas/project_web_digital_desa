@@ -15,18 +15,14 @@ class SocialAssistance extends Model
         'thumbnail',
         'name',
         'category',
-        'amout',
+        'amount',
         'provider',
         'description',
         'is_available',
     ];
 
 
-    public function scopeSearch($query, $search)
-    {
-        return $query->where('name', 'like', "%{$search}%")
-                    ->orWhere('provider', 'like', "%{$search}%")
-                    ->orWhere('amount', 'like', "%{$search}%");
+    // Removed duplicate scopeSearch method
 
     protected $casts = [
         'is_available' => 'boolean',
@@ -36,7 +32,8 @@ class SocialAssistance extends Model
     {
         return $query->where('name', 'like', '%'.$search.'%')
             ->orWhere('provider', 'like', '%'.$search.'%')
-            ->orWhere('amout', 'like', '%'.$search.'%');
+            ->orWhere('amount', 'like', '%'.$search.'%')
+            ->orWhere('category', 'like', '%'.$search.'%');
     }
 
     public function socialAssistanceRecipients()

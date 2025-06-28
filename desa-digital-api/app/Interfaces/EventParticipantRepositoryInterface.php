@@ -2,11 +2,11 @@
 
 namespace App\Interfaces;
 
-interface SocialAssistanceRepositoryInterface
+interface EventParticipantRepositoryInterface
 {
     public function getAll(
         ?string $search,
-        ?int $limit,
+        ?string $limit,
         bool $execute
     );
 
@@ -15,12 +15,12 @@ interface SocialAssistanceRepositoryInterface
         ?int $rowPerPage
     );
 
-    public function create(
-        array $data
-    );
-
     public function getById(
         string $id
+    );
+
+    public function create(
+        array $data
     );
 
     public function update(
@@ -32,4 +32,3 @@ interface SocialAssistanceRepositoryInterface
         string $id
     );
 }
-

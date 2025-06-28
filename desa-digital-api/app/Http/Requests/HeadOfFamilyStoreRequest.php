@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class HeadOfFamilyStoreRequest extends FormRequest
 {
-    
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -19,13 +17,13 @@ class HeadOfFamilyStoreRequest extends FormRequest
             'name' => 'required|string',
             'email' => 'required|string|email|unique:users',
             'password' => 'required|string|min:8',
-            'profile_picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'identy_number' => 'required|integer',
-            'gender' => 'required|string|in:Male,Female',
+            'profile_picture' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'identity_number' => 'required|integer',
+            'gender' => 'required|string|in:male,female',
             'date_of_birth' => 'required|date',
-            'phone_number' => 'required|string|',
+            'phone_number' => 'required|string',
             'occupation' => 'required|string|',
-            'marital_status' => 'required|string|in:Married,Single',
+            'marital_status' => 'required|string|in:married,single',
         ];
     }
 
@@ -36,12 +34,11 @@ class HeadOfFamilyStoreRequest extends FormRequest
             'email' => 'Email',
             'password' => 'Password',
             'profile_picture' => 'Foto Profil',
-            'identy_number' => 'identy_number',
+            'identity_number' => 'identity_number',
             'gender' => 'Jenis Kelamin',
             'phone_number' => 'Nomor Telepon',
             'occupation' => 'Pekerjaan',
             'marital_status' => 'Status Perkawinan',
         ];
     }
-
 }

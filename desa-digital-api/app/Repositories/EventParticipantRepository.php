@@ -2,19 +2,19 @@
 
 namespace App\Repositories;
 
-use App\Models\Event;
-use App\Interfaces\EventRepositoryInterface;
+use App\Models\EventParticipant;
+use App\Interfaces\EventParticipantRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
-class EventRepository implements EventRepositoryInterface
+class EventParticipantRepository implements EventParticipantRepositoryInterface
 {
     public function getAll(
         ?string $search,
         ?string $limit,
         bool $execute
     ) {
-        $query = Event::where(function ($query) use ($search){
+        $query = EventParticipant::where(function ($query) use ($search){
             if ($search) {
                 $query->search($search);
             }
@@ -49,7 +49,7 @@ class EventRepository implements EventRepositoryInterface
     public function getById(
         string $id
     ) {
-        $query = Event::where('id', $id);
+        $query = EventParticipant::where('id', $id);
 
         return $query->first();
     }
@@ -60,23 +60,17 @@ class EventRepository implements EventRepositoryInterface
         DB::beginTransaction();
 
         try {
-            $event = new Event;
-            $event->thumbnail = $data['thumbnail']->store('assets/events', 'public');
-            $event->name = $data['name'];
-            $event->description = $data['description'];
-            $event->price = $data['price'];
-            $event->date = $data['date'];
-            $event->time = $data['time'];
-
-            if (isset($data['is_active'])) {
-                $event->is_active = $data['is_active'];
-            }
-            
-            $event->save();
+            $eventParticipant = new EventParticipant();
+            $eventParticipant->event_id = $data['event_id'];
+            $eventParticipant->head_of_family_id = $data['head_of_family_id'];
+            $eventParticipant->quantity = $data['quantity'];
+            $eventParticipant->total_price = $data['total_price'];
+            $eventParticipant->payment_status = $data['payment_status'];
+            $eventParticipant->save();
 
             DB::commit();
 
-            return $event;
+            return $eventParticipant;
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -91,27 +85,18 @@ class EventRepository implements EventRepositoryInterface
         DB::beginTransaction();
 
         try {
-            $event = Event::find($id);
+            $eventParticipant = EventParticipant::find($id);
 
-            if (isset($data['thumbnail'])) {
-                $event->thumbnail = $data['thumbnail']->store('assets/events', 'public');
+            if (!$eventParticipant) {
+                throw new Exception("EventParticipant not found.");
             }
 
-            $event->name = $data['name'];
-            $event->description = $data['description'];
-            $event->price = $data['price'];
-            $event->date = $data['date'];
-            $event->time = $data['time'];
-
-            if (isset($data['is_active'])) {
-                $event->is_active = $data['is_active'];
-            }
-            
-            $event->save();
+            $eventParticipant->fill($data);
+            $eventParticipant->save();
 
             DB::commit();
 
-            return $event;
+            return $eventParticipant;
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -125,13 +110,17 @@ class EventRepository implements EventRepositoryInterface
         DB::beginTransaction();
 
         try {
-            $event = Event::find($id);
+            $eventParticipant = EventParticipant::find($id);
 
-            $event->delete();
+            if (!$eventParticipant) {
+                throw new Exception("EventParticipant not found.");
+            }
+
+            $eventParticipant->delete();
 
             DB::commit();
 
-            return $event;
+            return $eventParticipant;
         } catch (\Exception $e) {
             DB::rollBack();
 

@@ -20,7 +20,7 @@ class HeadOfFamily extends Model
         'date_of_birth',
         'phone_number',
         'occupation',
-        'martial_status',
+        'marital_status',
     ];
 
     // ABoy 

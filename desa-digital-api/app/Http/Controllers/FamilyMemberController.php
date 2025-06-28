@@ -7,6 +7,8 @@ use App\Http\Resources\FamilyMemberResource;
 use App\Http\Resources\PaginateResource;
 use App\Interfaces\FamilyMemberRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Http\Requests\FamilyMemberStoreRequest;
+use App\Http\Requests\FamilyMemberUpdateRequest;
 
 class FamilyMemberController extends Controller 
 {
@@ -30,7 +32,7 @@ class FamilyMemberController extends Controller
                 true
             );
 
-            return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Diambil', FamilyMemberResource::collection($familyMember), 200);
+            return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Diambil', FamilyMemberResource::collection($familyMembers), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
         }
@@ -40,18 +42,18 @@ class FamilyMemberController extends Controller
     {
         $request = $request->validate([
             'search' => 'nullable|string',
-
+            'row_per_page' => 'required|integer'
         ]);
 
         try {
             $familyMembers = $this->familyMemberRepository->getAllPaginated(
                 $request['search'] ?? null,
-                $request['row_per_[page'],
+                $request['row_per_page'],
             );
 
             return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Diambil',PaginateResource::make($familyMembers, FamilyMemberResource::class), 200);
-        } catch (\Exception $th) {
-             return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e ->getMessage(), null,500);
         }
     }
     /**
@@ -59,12 +61,13 @@ class FamilyMemberController extends Controller
      */
     public function store(FamilyMemberStoreRequest $request)
     {
+        $request = $request->validated();
         try {
             $familyMember = $this->familyMemberRepository->create($request);
 
-             return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Ditambahkan', new FamilyMemberResource($familyMember), 200);
-        }  catch (\Exception $th) {
-             return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
+            return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Ditambahkan', new FamilyMemberResource($familyMember), 200);
+        }  catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
         } 
     }
 
@@ -85,7 +88,7 @@ class FamilyMemberController extends Controller
 
             
              return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Ditemukan', new FamilyMemberResource($familyMember), 200);
-        }  catch (\Exception $th) {
+        }  catch (\Exception $e) {
              return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
     
         }
@@ -114,7 +117,7 @@ class FamilyMemberController extends Controller
             );
 
             return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Diupdate', new FamilyMemberResource($familyMember), 200);
-        } catch (\Exception $th) {
+        } catch (\Exception $e) {
              return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
     
         } 
@@ -125,7 +128,7 @@ class FamilyMemberController extends Controller
      */
     public function destroy(string $id)
     {
-         try {
+        try {
             $familyMember = $this->familyMemberRepository->getById(
                 $id
 
@@ -137,9 +140,9 @@ class FamilyMemberController extends Controller
 
             $this->familyMemberRepository->delete($id);
             
-             return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Dihapus', null, 200);
-        }  catch (\Exception $th) {
-             return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
+            return ResponseHelper::jsonResponse(true, 'Data Anggota Keluarga Berhasil Dihapus', null, 200);
+        }  catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null,500);
     
         }
     }

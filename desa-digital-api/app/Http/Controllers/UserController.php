@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Requests\UserStroreRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\PaginateResource;
 use App\Http\Resources\UserResource;
 use App\Helpers\ResponseHelper;
-use App\Interface\UserRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -51,7 +51,12 @@ class UserController extends Controller
                 $request['row_per_page']
             );
 
-            return ResponseHelper::jsonResponse(true, 'User Berhasil diambil', PaginateResource::make, 200);
+            return ResponseHelper::jsonResponse(
+                true, 
+                'User Berhasil diambil', 
+                // PaginateResource::make($users),
+                new PaginateResource($users, UserResource::class), 
+                200);
         } catch(\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -60,7 +65,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserStroreRequest $request)
+    public function store(UserStoreRequest $request)
     {
         $request = $request->validated();
 
@@ -134,9 +139,11 @@ class UserController extends Controller
                 return ResponseHelper::jsonResponse(false, 'User tidak ditemukan', null, 404);
             }
 
-            $user = $this->userRepository->delete(
-                $id,
-            );
+            // $user = $this->userRepository->delete(
+            //     $id,
+            // );
+
+            $this->userRepository->delete($id);
 
             return ResponseHelper::jsonResponse(true, 'data user berhasil dihapus', new UserResource($user), 200);
         }catch(\Exception $e) {

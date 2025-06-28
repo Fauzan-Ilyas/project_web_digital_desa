@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interface;
+namespace App\Interfaces;
 
 interface UserRepositoryInterface
 {
@@ -31,9 +31,5 @@ interface UserRepositoryInterface
     public function delete(
         string $id
     );
-// <<<<<<< api_family_member
-// }
+}
 
-// =======
-// } 
-// >>>>>>> main

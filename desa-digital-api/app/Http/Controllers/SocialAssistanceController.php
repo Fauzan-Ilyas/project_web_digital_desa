@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\SocialAssistanceStoreRequest;
+use App\Http\Requests\SocialAssistanceUpdateRequest;
 use App\Interfaces\SocialAssistanceRepositoryInterface;
 use App\Models\SocialAssistance;
 use Illuminate\Http\Request;
 use App\Http\Resources\SocialAssistanceResource;
 use App\Http\Resources\PaginateResource;
+use App\Repositories\SocialAssistanceRepository;
 
 class SocialAssistanceController extends Controller
 {
@@ -47,7 +50,7 @@ class SocialAssistanceController extends Controller
     {
         $request = $request->validate([
             'search' => 'nullable|string',
-            'rowPerPage' => 'required|integer',
+            'row_per_page' => 'required|integer',
         ]);
 
         try {
@@ -73,9 +76,24 @@ class SocialAssistanceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SocialAssistanceStoreRequest $request)
     {
-        //
+        $request = $request->validated();
+
+        try {
+            $socialAssistance = $this->socialAssistanceRepository->create($request);
+            return ResponseHelper::jsonResponse(
+                true, 
+                'Bantuan sosial berhasil dibuat', 
+                new SocialAssistanceResource($socialAssistance), 
+                201);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(
+                false, 
+                $e->getMessage(), 
+                null, 
+                500);
+        }
     }
 
     /**
@@ -83,15 +101,63 @@ class SocialAssistanceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $socialAssistance = $this->socialAssistanceRepository->getById($id);
+
+            if (!$socialAssistance) {
+                return ResponseHelper::jsonResponse(
+                    false, 
+                    'Bantuan sosial tidak ditemukan', 
+                    null, 
+                    404);
+            }
+
+            return ResponseHelper::jsonResponse(
+                true, 
+                'Data bantuan sosial berhasil diambil', 
+                new SocialAssistanceResource($socialAssistance), 
+                200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(
+                false, 
+                $e->getMessage(), 
+                null, 
+                500);
+        } 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(SocialAssistanceUpdateRequest $request, string $id)
     {
-        //
+        $request = $request->validated();
+
+        try {
+            $socialAssistance = $this->socialAssistanceRepository->getById($id);
+            
+            if (!$socialAssistance) {
+                return ResponseHelper::jsonResponse(
+                    false, 
+                    'Bantuan sosial tidak ditemukan', 
+                    null, 
+                    404);
+                }
+                
+            $socialAssistance = $this->socialAssistanceRepository->update($id, $request);
+            
+            return ResponseHelper::jsonResponse(
+                true, 
+                'Data bantuan sosial berhasil diperbarui', 
+                new SocialAssistanceResource($socialAssistance), 
+                200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(
+                false, 
+                $e->getMessage(), 
+                null, 
+                500);
+        }
     }
 
     /**
@@ -99,7 +165,31 @@ class SocialAssistanceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $socialAssistance = $this->socialAssistanceRepository->getById($id);
+            
+            if (!$socialAssistance) {
+                return ResponseHelper::jsonResponse(
+                    false, 
+                    'Bantuan sosial tidak ditemukan', 
+                    null, 
+                    404);
+            }
+
+            $this->socialAssistanceRepository->delete($id);
+
+            return ResponseHelper::jsonResponse(
+                true, 
+                'Bantuan sosial berhasil dihapus', 
+                null, 
+                200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(
+                false, 
+                $e->getMessage(), 
+                null, 
+                500);
+        }
     }
 }
 

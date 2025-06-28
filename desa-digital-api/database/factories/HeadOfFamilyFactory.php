@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Factories;
-   
+
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -23,7 +23,7 @@ class HeadOfFamilyFactory extends Factory
             'date_of_birth' => $this->faker->dateTimeBetween('-60 years', 'now'),
             'phone_number' => $this->faker->unique()->phoneNumber(),
             'occupation' => $this->faker->jobTitle(),
-            'martial_status' => $this->faker->randomElement(['married', 'single']),
+            'marital_status' => $this->faker->randomElement(['married', 'single']),
         ];
     }
 }
