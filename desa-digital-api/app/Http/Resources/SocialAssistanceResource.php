@@ -23,9 +23,9 @@ class SocialAssistanceResource extends JsonResource
             'provider' => $this->provider,
             'description' => $this->description,
             'is_available' => $this->is_available
-            // 'recipients_count' => $this->socialAssistanceRecipients()->count(),
-            // 'created_at' => $this->created_at,
-            // 'updated_at' => $this->updated_at,
+            'recipients_count' => $this->socialAssistanceRecipients()->count(),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
