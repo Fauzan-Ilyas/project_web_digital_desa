@@ -2,6 +2,10 @@
 import SidebarItem from './SidebarItem.vue';
 import iconChartActive from '@/assets/images/icons/chart-square-dark-green.svg';
 import iconChartInactive from '@/assets/images/icons/chart-square-secondary-green.svg';
+
+import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg';
+import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg';
+
 import iconBagActive from '@/assets/images/icons/bag-2-dark-green.svg';
 import iconBagInactive from '@/assets/images/icons/bag-2-secondary-green.svg';
 
@@ -13,10 +17,17 @@ const sidebarItems = [
         iconInactive: iconChartInactive
     },
     {
+        label: 'Kepala Rumah',
+        path: '/head-of-family',
+        iconActive: iconCrownActive,
+        iconInactive: iconCrownInactive
+    },
+    {
         label: 'Bantuan Sosial',
         path: '',
         iconActive: iconBagActive,
-        iconInactive: iconBagInactive,
+        iconInactive: iconBagInactive
+
         children: [
             {
                 label: 'List Bansos',
