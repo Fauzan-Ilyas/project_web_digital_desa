@@ -110,21 +110,21 @@ const router = createRouter({
       name: 'NotFound',
       component: NotFound
           meta: { requiresAuth: true }
-        }
+        },
+        {
+          path: 'development',
+          name: 'development',
+          component: Developments,
+          meta: { requiresAuth: true, permission: 'development-list' }
+        },
+        {
+          path: 'development/:id',
+          name: 'development',
+          component: 'Development',
+          meta: { requiresAuth: true, permission: 'development-list' }
+        },
       ]
     },
-    // {
-    //   path: '',
-    //   component: lol,
-    //   children: [
-    //     {
-    //       path: 'development',
-    //       name: 'development',
-    //       component: Developments,
-    //       meta: { requiresAuth: true, permission: 'development-list' }
-    //     }
-    //   ]
-    // },
     {
       path: '/login',
       component: Auth,

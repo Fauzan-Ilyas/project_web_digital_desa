@@ -13,11 +13,11 @@ const { fetchDevelopmentsPaginated } = developmentStore;
 
 const serverOptions = ref({
   page: 1,
-  row_per_page: 10,
+  row_per_page: 10
 });
 
 const filters = ref({
-  search: null,
+  search: null
 });
 
 const fetchData = async () => {
@@ -50,7 +50,7 @@ watch(
 
 <template>
   <div id="Header" class="flex items-center justify-between">
-    <h1 class="font-semibold text-2xl">Pembangunan Desa</h1>
+    <h1 class="font-semibold text-2xl">List Bantuan Sosial</h1>
     <a
       href="kd-pembangunan-desa-add.html"
       class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-dark-green"
@@ -64,7 +64,7 @@ watch(
     </a>
   </div>
 
-  <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-2xl relative mb-4" role="alert">
+  <div v-if="success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-2xl relative mb-4" role="alert">
     <span class="block sm:inline">{{ success }}</span>
 
     <button type="button" @click="success = null" class="absolute top-1/2 -translate-y-1/2 right-4">

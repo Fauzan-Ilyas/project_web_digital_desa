@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
-import { axiosInstance } from '@/plugins/axios'
+import { axiosInstance } from '../plugins/axios'
 import { handleError } from '@/helpers/errorHelper'
 import router from '@/router'
 
 export const useDevelopmentStore = defineStore('development', {
     state: () => ({
-        developmentData: {},
+        developments: {},
         meta: {
             current_page: 1,
             last_page: 1,
@@ -17,7 +17,7 @@ export const useDevelopmentStore = defineStore('development', {
         success: null
     }),
     actions: {
-        async fetchDevelopmentPaginated(params) {
+        async fetchDevelopmentsPaginated(params) {
             this.loading = true
 
             try {
@@ -31,5 +31,33 @@ export const useDevelopmentStore = defineStore('development', {
                 this.loading = false
             }
         },
+
+        async fetchDevelopment(id) {
+            this.loading = true
+
+            try {
+                const response = await axiosInstance.get(`development/${id}`)
+
+                return response.data.data
+            } catch (error) {
+                this.error = handleError(error)
+            } finally {
+                this.loading = false
+            }
+        },
+
+        async deleteDevelopment(id) {
+            this.loading = true
+
+            try {
+                const response = await axiosInstance.delete(`development/${id}`)
+
+                this.success = response.data.message
+            } catch (error) {
+                this.error = handleError(error)
+            } finally {
+                this.loading = false
+            }
+        }
     }
 });
