@@ -25,8 +25,8 @@ const sidebarItems = [
   {
     label: 'Kepala Rumah',
     path: '/head-of-family',
-    iconActive: iconCrownInactive,
-    iconInactive: iconCrownActive
+    iconActive: iconCrownActive,
+    iconInactive: iconCrownInactive
   },
   {
     label: 'Profile Desa',
@@ -42,7 +42,7 @@ const sidebarItems = [
     children: [
       {
         label: 'List Bansos',
-        path: '/social-assistance',
+        path: '/social-assistance'
       },
       {
         label: 'Pengajuan Bansos',
