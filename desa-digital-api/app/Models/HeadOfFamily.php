@@ -51,6 +51,6 @@ class HeadOfFamily extends Model
 
     public function eventParticipants()
     {
-        return $this->hasMany(EventParticipants::class);
+        return $this->hasMany(EventParticipant::class);
     }
 }

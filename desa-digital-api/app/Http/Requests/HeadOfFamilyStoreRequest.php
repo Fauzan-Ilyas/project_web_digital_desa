@@ -30,11 +30,11 @@ class HeadOfFamilyStoreRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Name',
+            'name' => 'Nama',
             'email' => 'Email',
-            'password' => 'Password',
+            'password' => 'Kata Sandi',
             'profile_picture' => 'Foto Profil',
-            'identity_number' => 'identity_number',
+            'identity_number' => 'Nomor Identitas',
             'gender' => 'Jenis Kelamin',
             'phone_number' => 'Nomor Telepon',
             'occupation' => 'Pekerjaan',

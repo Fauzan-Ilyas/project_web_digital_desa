@@ -12,7 +12,7 @@ interface HeadOfFamilyRepositoryInterface
 
     public function getAllPaginated(
         ?string $search,
-        ?int $rowPage
+        ?int $rowPerPage
     );
 
     public function getById(

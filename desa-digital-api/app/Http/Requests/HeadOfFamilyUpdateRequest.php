@@ -20,7 +20,7 @@ class HeadOfFamilyUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'nullable|string|email|unique:users,email,' . optional(HeadOfFamily::find($this->route('head_of_family')))->user_id,
+            'email' => 'nullable|string|email|max:255|unique:users,email,' . HeadOfFamily::find($this->route('head_of_family'))->user_id,
             'password' => 'nullable|string|min:8',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'identity_number' => 'required|integer',
@@ -35,11 +35,11 @@ class HeadOfFamilyUpdateRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => 'Name',
+            'name' => 'Nama',
             'email' => 'Email',
-            'password' => 'Password',
+            'password' => 'Kata Sandi',
             'profile_picture' => 'Foto Profil',
-            'identity_number' => 'identity_number',
+            'identity_number' => 'Nomor Identitas',
             'gender' => 'Jenis Kelamin',
             'phone_number' => 'Nomor Telepon',
             'occupation' => 'Pekerjaan',

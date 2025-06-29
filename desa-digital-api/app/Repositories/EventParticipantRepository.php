@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\EventParticipant;
+use App\Models\Event;
 use App\Interfaces\EventParticipantRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -60,12 +61,14 @@ class EventParticipantRepository implements EventParticipantRepositoryInterface
         DB::beginTransaction();
 
         try {
+            $event = Event::where('id', $data['event_id'])->first();
+
             $eventParticipant = new EventParticipant();
             $eventParticipant->event_id = $data['event_id'];
             $eventParticipant->head_of_family_id = $data['head_of_family_id'];
             $eventParticipant->quantity = $data['quantity'];
-            $eventParticipant->total_price = $data['total_price'];
-            $eventParticipant->payment_status = $data['payment_status'];
+            $eventParticipant->total_price = $event->price * $data['quantity'];
+            $eventParticipant->payment_status = "pending";
             $eventParticipant->save();
 
             DB::commit();
@@ -85,13 +88,20 @@ class EventParticipantRepository implements EventParticipantRepositoryInterface
         DB::beginTransaction();
 
         try {
-            $eventParticipant = EventParticipant::find($id);
+            $event = Event::where('id', $data['event_id'])->first();
 
-            if (!$eventParticipant) {
-                throw new Exception("EventParticipant not found.");
+            $eventParticipant = EventParticipant::find($id);
+            $eventParticipant->event_id = $data['event_id'];
+            $eventParticipant->head_of_family_id = $data['head_of_family_id'];
+            
+            if(isset($data['quantity'])) {
+                $eventParticipant->quantity = $data['quantity'];
+            } else {
+                $data['quantity'] = $eventParticipant->quantity;
             }
 
-            $eventParticipant->fill($data);
+            $eventParticipant->total_price = $event->price * $data['quantity'];
+            $eventParticipant->payment_status = $data['payment_status'];
             $eventParticipant->save();
 
             DB::commit();
@@ -111,10 +121,6 @@ class EventParticipantRepository implements EventParticipantRepositoryInterface
 
         try {
             $eventParticipant = EventParticipant::find($id);
-
-            if (!$eventParticipant) {
-                throw new Exception("EventParticipant not found.");
-            }
 
             $eventParticipant->delete();
 

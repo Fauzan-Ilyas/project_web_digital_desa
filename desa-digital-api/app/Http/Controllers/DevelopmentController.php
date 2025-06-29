@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\DevelopmentStoreRequest;
+use App\Http\Requests\DevelopmentUpdateRequest;
 use App\Http\Resources\DevelopmentResource;
+use App\Http\Resources\PaginateResource;
+use App\Models\Development;
 use Illuminate\Http\Request;
 
 class DevelopmentController extends Controller
@@ -22,13 +26,13 @@ class DevelopmentController extends Controller
     public function index(Request $request)
     {
         try {
-            $events = $this->developmentRepository->getAll(
+            $developments = $this->developmentRepository->getAll(
                 $request->search,
                 $request->limit,
                 true
             );
 
-            return ResponseHelper::jsonResponse(true, 'Data Event Berhasil Diambil', DevelopmentResource::collection($events), 200);
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Diambil', DevelopmentResource::collection($developments), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -36,18 +40,18 @@ class DevelopmentController extends Controller
 
     public function getAllPaginated(Request $request)
     {
-        $request = $request->validated([
+        $request = $request->validate([
             'search' => 'nullable|string',
             'row_per_page' => 'required|integer'
         ]);
 
         try {
-            $events = $this->developmentRepository->getAllPaginated(
+            $developments = $this->developmentRepository->getAllPaginated(
                 $request['search'] ?? null,
                 $request['row_per_page'],
             );
 
-            return ResponseHelper::jsonResponse(true, 'Data Event Berhasil Diambil', PaginateResource::make($events, DevelopmentResource::class), 200);
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Diambil', PaginateResource::make($developments, DevelopmentResource::class), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -56,9 +60,17 @@ class DevelopmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DevelopmentStoreRequest $request)
     {
-        //
+        $request = $request->validated();
+
+        try {
+            $development = $this->developmentRepository->create($request);
+
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Dibuat', new DevelopmentResource($development), 201);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
     /**
@@ -66,15 +78,38 @@ class DevelopmentController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $development = $this->developmentRepository->getById($id);
+
+            if (!$development) {
+                return ResponseHelper::jsonResponse(false, 'Data Pembangunan Tidak Ditemukan', null, 404);
+            }
+
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Diambil', new DevelopmentResource($development), 200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DevelopmentUpdateRequest $request, string $id)
     {
-        //
+        $request = $request->validated();
+        try {
+            $development = $this->developmentRepository->getById($id);
+
+            if (!$development) {
+                return ResponseHelper::jsonResponse(false, 'Data Pembangunan Tidak Ditemukan', null, 404);
+            }
+
+            $development = $this->developmentRepository->update($id, $request);
+
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Diupdate', new DevelopmentResource($development), 200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
     /**
@@ -82,6 +117,18 @@ class DevelopmentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $development = $this->developmentRepository->getById($id);
+
+            if (!$development) {
+                return ResponseHelper::jsonResponse(false, 'Data Pembangunan Tidak Ditemukan', null, 404);
+            }
+
+            $this->developmentRepository->delete($id);
+
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Dihapus', null , 200);
+        } catch (\Exception $e) {
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 }

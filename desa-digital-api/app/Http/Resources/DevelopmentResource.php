@@ -19,10 +19,10 @@ class DevelopmentResource extends JsonResource
             'thumbnail' => $this->thumbnail,
             'name' => $this->name,
             'description' => $this->description,
-            'person_in_change' => $this->person_in_change,
+            'person_in_charge' => $this->person_in_charge,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
-            'amount' => $this->amount,
+            'amount' => (float)(string) $this->amount,
             'status' => $this->status,
         ];
     }
