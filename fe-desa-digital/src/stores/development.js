@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { axiosInstance } from '../plugins/axios'
 import { handleError } from '@/helpers/errorHelper'
 import router from '@/router'
+import { update } from 'lodash';
 
 export const useDevelopmentStore = defineStore('development', {
     state: () => ({
@@ -39,6 +40,41 @@ export const useDevelopmentStore = defineStore('development', {
                 const response = await axiosInstance.get(`development/${id}`)
 
                 return response.data.data
+            } catch (error) {
+                this.error = handleError(error)
+            } finally {
+                this.loading = false
+            }
+        },
+
+        async createDevelopment(payload) {
+            this.loading = true
+
+            try {
+                const response = await axiosInstance.post('development', payload)
+
+                this.success = response.data.message
+
+                router.push({ name: 'development' })
+            } catch (error) {
+                this.error = handleError(error)
+            } finally {
+                this.loading = false
+            }
+        },
+
+        async updateDevelopment(payload) {
+            this.loading = true
+
+            try {
+                const response = await axiosInstance.post(`development/${payload.id}`, {
+                    ...payload,
+                    _method: 'PUT'
+                })
+
+                this.success = response.data.message
+
+                router.push({ name: 'manage-development', params: { id: payload.id } })
             } catch (error) {
                 this.error = handleError(error)
             } finally {
