@@ -1,3 +1,41 @@
+<script setup>
+import SidebarItem from './SidebarItem.vue';
+import iconChartActive from '@/assets/images/icons/chart-square-dark-green.svg';
+import iconChartInactive from '@/assets/images/icons/chart-square-secondary-green.svg';
+import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg';
+import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg';
+import iconBagInactive from '@/assets/images/icons/bag-2-dark-green.svg';
+import iconBagInactive from '@/assets/images/icons/bag-2-secondary-green.svg';
+
+const sidebarItems = [
+    {
+        label: 'Dashboard',
+        path: '/',
+        iconActive: iconChartActive,
+        iconInactive: iconChartInactive
+    },
+    {
+        label: 'Kepala Rumah',
+        path: '/head-of-family',
+        iconActive: iconCrownActive,
+        iconInactive: iconCrownInactive
+    },
+    {
+        label: 'Bantuan Sosial',
+        path: '',
+        iconActive: iconBagInactive,
+        iconInactive: iconBagInactive,
+        children: [
+            {
+                label: 'List Bansos',
+                path: '/sosial-assistance'
+            }
+        ]
+    }
+];
+
+</script>
+
 <template>
     <aside id="Sidebar" class="relative flex w-[280px] shrink-0 min-h-screen bg-white border-r border-desa-foreshadow overflow-hidden">
                 <div class="fixed top-0 h-full w-[280px] flex shrink-0 flex-1 z-20 bg-white">
