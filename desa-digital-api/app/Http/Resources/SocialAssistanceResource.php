@@ -24,6 +24,9 @@ class SocialAssistanceResource extends JsonResource
             'description' => $this->description,
             'is_available' => $this->is_available,
             'social_assistance_recipients' => SocialAssistanceRecipientResource::collection($this->whenLoaded('socialAssistanceRecipients'))
+            'recipients_count' => $this->socialAssistanceRecipients()->count(),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

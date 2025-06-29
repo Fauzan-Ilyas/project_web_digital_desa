@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Models\Development;
-use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -15,11 +14,11 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface {
         ?string $limit,
         bool $execute
     ) {
-        $query = Event::where(function ($query) use ($search) {
+        $query = Development::where(function ($query) use ($search) {
            if ($search) {
                $query->search($search);
            } 
-        });
+        })->with('developmentApplicants');
 
         $query->orderBy('created_at', 'desc');
 
