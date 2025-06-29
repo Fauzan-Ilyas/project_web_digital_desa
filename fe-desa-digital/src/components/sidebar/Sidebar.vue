@@ -32,7 +32,25 @@ const sidebarItems = [
     label: 'Profile Desa',
     path: '/profile',
     iconActive: iconBuilding4Active,
-    iconInactive: iconBuilding4Inactive
+  },
+  {
+    label: 'Jadwal Desa',
+    path: '',
+    iconActive: iconBagactive,
+    iconInactive: iconBagInactive,
+    children: [
+      {
+        label: 'Pembagunan',
+        path: '/development',
+      },
+      {
+        label: 'Event Desa',
+        path: '/even',
+      }
+    ]
+  }
+];
+   
   },
   {
     label: 'Bantuan Sosial',
