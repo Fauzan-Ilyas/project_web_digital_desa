@@ -5,11 +5,15 @@ import SidebarItem from './SidebarItem.vue'
 import iconChartActive from '@/assets/images/icons/chart-square-dark-green.svg'
 import iconChartInactive from '@/assets/images/icons/chart-square-secondary-green.svg'
 
-// Icon Kepala Rumah
+// Icon Kepala Rumah & Profile Desa
 import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg'
 import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg'
 import iconBuilding4Active from '@/assets/images/icons/building-4-dark-green.svg'
 import iconBuilding4Inactive from '@/assets/images/icons/building-4-secondary-green.svg'
+
+// Icon Bansos dan Jadwal (pakai iconBag sebagai contoh)
+import iconBagActive from '@/assets/images/icons/bag-2-dark-green.svg'
+import iconBagInactive from '@/assets/images/icons/bag-2-secondary-green.svg'
 
 const sidebarItems = [
   {
@@ -21,14 +25,13 @@ const sidebarItems = [
   {
     label: 'Kepala Rumah',
     path: '/head-of-family',
-    iconActive: iconCrownInactive,
-    iconInactive: iconCrownActive
+    iconActive: iconCrownActive,
+    iconInactive: iconCrownInactive
   },
-   {
+  {
     label: 'Profile Desa',
     path: '/profile',
     iconActive: iconBuilding4Active,
-    iconInactive: iconBuilding4Inactive,
   },
   {
     label: 'Jadwal Desa',
@@ -47,6 +50,37 @@ const sidebarItems = [
     ]
   }
 ];
+   
+  },
+  {
+    label: 'Bantuan Sosial',
+    path: '',
+    iconActive: iconBagActive,
+    iconInactive: iconBagInactive,
+    children: [
+      {
+        label: 'List Bansos',
+        path: '/social-assistance'
+      },
+      {
+        label: 'Pengajuan Bansos',
+        path: '/social-assistance-recipient'
+      }
+    ]
+  },
+  {
+    label: 'Jadwal Desa',
+    path: '',
+    iconActive: iconBagActive,
+    iconInactive: iconBagInactive,
+    children: [
+      {
+        label: 'Pembangunan',
+        path: '/development'
+      }
+    ]
+  }
+]
 </script>
 
 <template>
