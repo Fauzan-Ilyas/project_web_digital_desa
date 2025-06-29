@@ -2,12 +2,10 @@
 import SidebarItem from './SidebarItem.vue';
 import iconChartActive from '@/assets/images/icons/chart-square-dark-green.svg';
 import iconChartInactive from '@/assets/images/icons/chart-square-secondary-green.svg';
-
 import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg';
 import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg';
-
-import iconBagActive from '@/assets/images/icons/bag-2-dark-green.svg';
 import iconBagInactive from '@/assets/images/icons/bag-2-secondary-green.svg';
+import iconBagActive from '@/assets/images/icons/bag-2-dark-green.svg';
 
 const sidebarItems = [
     {
@@ -27,11 +25,10 @@ const sidebarItems = [
         path: '',
         iconActive: iconBagActive,
         iconInactive: iconBagInactive
-
         children: [
             {
                 label: 'List Bansos',
-                path: '/social-assistance',
+                path: '/sosial-assistance'
             },
             {
                 label: 'Pengajuan Bansos',
@@ -52,6 +49,7 @@ const sidebarItems = [
         ]
     }
 ];
+
 </script>
 
 <template>

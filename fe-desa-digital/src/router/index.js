@@ -3,6 +3,7 @@ import { useAuthStore } from "@/stores/auth";
 
 import Auth from "@/layouts/Auth.vue";
 import Main from "@/layouts/Main.vue";
+
 import Dashboard from "@/views/Dashboard.vue";
 import Login from "@/views/Login.vue";
 
@@ -11,6 +12,9 @@ import HeadOfFamily from "@/views/head-of-family/HeadOfFamily.vue";
 import HeadOfFamilyCreate from "@/views/head-of-family/HeadOfFamilyCreate.vue";
 
 import SocialAssistances from "@/views/social-assistance/SocialAssistances.vue";
+import SocialAssistance from "@/views/social-assistance/SocialAssistance.vue";
+import SocialAssistanceEdit from "@/views/social-assistance/SocialAssistanceEdit.vue";
+import SocialAssistanceCreate from "@/views/social-assistance/SocialAssistanceCreate.vue";
 import SocialAssistancesEdit from "@/views/social-assistance/SocialAssistancesEdit.vue";
 import SocialAssistancesCreate from "@/views/social-assistance/SocialAssistancesCreate.vue";
 import SocialAssistanceRecipients from "@/views/social-assistance/SocialAssistanceRecipients.vue";
@@ -18,6 +22,7 @@ import SocialAssistanceRecipients from "@/views/social-assistance/SocialAssistan
 import Developments from "@/views/development/Developments.vue";
 import Development from "@/views/development/Development.vue";
 import DevelopomentEdit from "@/views/development/DevelopmentEdit.vue";
+import DevelopmentCreate from "@/views/development/DevelopmentCreate.vue";
 
 import Error403 from "@/views/Error403.vue";
 import NotFound from "@/views/NotFound.vue";
@@ -42,18 +47,17 @@ const router = createRouter({
           meta: { requiresAuth: true, permission: "head-of-family-list" },
         },
         {
-          path: "head-of-family/create",
-          name: "create-head-of-family",
-          component: HeadOfFamilyCreate,
-          meta: { requiresAuth: true, permission: "head-of-family-create" },
-        },
-        {
           path: "head-of-family/:id",
           name: "manage-head-of-family",
           component: HeadOfFamily,
           meta: { requiresAuth: true, permission: "head-of-family-list" },
         },
-
+        {
+          path: "head-of-family/create",
+          name: "create-head-of-family",
+          component: HeadOfFamilyCreate,
+          meta: { requiresAuth: true, permission: "head-of-family-create" },
+        },
         {
           path: "social-assistance",
           name: "social-assistance",
@@ -61,24 +65,23 @@ const router = createRouter({
           meta: { requiresAuth: true, permission: "social-assistance-list" },
         },
         {
-          path: "social-assistance/create",
-          name: "create-social-assistance",
-          component: SocialAssistancesCreate,
+          path: "social-assistance/:id",
+          name: "manage-social-assistance",
+          component: SocialAssistance,
           meta: { requiresAuth: true, permission: "social-assistance-create" },
         },
         {
           path: "social-assistance/edit/:id",
           name: "edit-social-assistance",
-          component: SocialAssistancesEdit,
+          component: SocialAssistanceEdit,
           meta: { requiresAuth: true, permission: "social-assistance-edit" },
         },
         {
-          path: "social-assistance/:id",
-          name: "manage-social-assistance",
-          component: SocialAssistances,
-          meta: { requiresAuth: true, permission: "social-assistance-list" },
+          path: "social-assistance/create",
+          name: "create-social-assistance",
+          component: SocialAssistanceCreate,
+          meta: { requiresAuth: true, permission: "social-assistance-create" },
         },
-
         {
           path: "social-assistance-recipient",
           name: "social-assistance-recipient",
@@ -97,7 +100,6 @@ const router = createRouter({
             permission: "social-assistance-recipient-list",
           },
         },
-
         {
           path: "development",
           name: "development",
