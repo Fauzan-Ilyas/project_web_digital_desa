@@ -24,7 +24,7 @@ class ProfileController extends Controller
             $profile = $this->profileRepository->get();
 
             if (!$profile) {
-                return ResponseHelper::jsonResponse(false, 'Data Profile Tidak Ada', null, 404);
+                return ResponseHelper::jsonResponse(false, 'Data Profile Tidak Ada', null, 200);
             }
             return ResponseHelper::jsonResponse(true, 'Profil Berhasil diambil', new ProfileResource($profile), 200);
         } catch (\Exception $e) {
