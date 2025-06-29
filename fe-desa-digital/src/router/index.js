@@ -55,7 +55,31 @@ const router = createRouter({
           name: 'create-profile',
           component: 'ProfileProfile',
           meta: { requiresAuth: true, permission: 'profile-create' }
-        }
+        },
+        {
+          path: 'event',
+          name: 'event',
+          component: 'Events',
+          meta: { requiresAuth: true, permission: 'event-list' }
+        },
+        {
+          path: 'event/:id',
+          name: 'manage-event',
+          component: 'Event',
+          meta: { requiresAuth: true, permission: 'event-list' }
+        },
+        {
+          path: 'event/edit/:id',
+          name: 'edit-event',
+          component: 'EventEdit',
+          meta: { requiresAuth: true, permission: 'event-edit' }
+        },
+        {
+          path: 'event/create',
+          name: 'create-event',
+          component: 'EventCreate',
+          meta: { requiresAuth: true, permission: 'event-create' }
+        },
       ]
     },
     {
