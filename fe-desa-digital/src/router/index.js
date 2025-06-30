@@ -21,6 +21,7 @@ import DevelopomentEdit from "@/views/development/DevelopmentEdit.vue";
 
 import Error403 from "@/views/Error403.vue";
 import NotFound from "@/views/NotFound.vue";
+import FamilyMemberCreate from "@/views/family-member/FamilyMemberCreate.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -36,9 +37,33 @@ const router = createRouter({
           meta: { requiresAuth: true, permission: "dashboard-menu" },
         },
         {
+          path: "family-member",
+          name: "family-member",
+          component: FamilyMembers,
+          meta: { requiresAuth: true, permission: "family-member-list" },
+        },
+        {
+          path: "family-member/:id",
+          name: "manage-family-member",
+          component: FamilyMember,
+          meta: { requiresAuth: true, permission: "family-member-list" },
+        },
+        {
+          path: "family-member/create",
+          name: "create-family-member",
+          component: FamilyMemberCreate,
+          meta: { requiresAuth: true, permission: "family-member-create" },
+        },
+        {
           path: "head-of-family",
           name: "head-of-family",
           component: HeadOfFamilies,
+          meta: { requiresAuth: true, permission: "head-of-family-list" },
+        },
+        {
+          path: "head-of-family/:id",
+          name: "manage-head-of-family",
+          component: HeadOfFamily,
           meta: { requiresAuth: true, permission: "head-of-family-list" },
         },
         {
@@ -46,12 +71,6 @@ const router = createRouter({
           name: "create-head-of-family",
           component: HeadOfFamilyCreate,
           meta: { requiresAuth: true, permission: "head-of-family-create" },
-        },
-        {
-          path: "head-of-family/:id",
-          name: "manage-head-of-family",
-          component: HeadOfFamily,
-          meta: { requiresAuth: true, permission: "head-of-family-list" },
         },
 
         {

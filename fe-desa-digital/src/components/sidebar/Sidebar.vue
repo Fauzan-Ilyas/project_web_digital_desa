@@ -14,28 +14,38 @@ const sidebarItems = [
         label: 'Dashboard',
         path: '/',
         iconActive: iconChartActive,
-        iconInactive: iconChartInactive
+        iconInactive: iconChartInactive,
+        permission: 'dashboard-menu'
     },
     {
         label: 'Kepala Rumah',
         path: '/head-of-family',
         iconActive: iconCrownActive,
-        iconInactive: iconCrownInactive
+        iconInactive: iconCrownInactive,
+        permission: 'head-of-family-menu'
+    },
+    {
+        label: 'Anggota Keluarga',
+        path: '/family-member',
+        iconActive: iconCrownActive,
+        iconInactive: iconCrownInactive,
+        permission: 'family-member-menu'
     },
     {
         label: 'Bantuan Sosial',
         path: '',
         iconActive: iconBagActive,
-        iconInactive: iconBagInactive
-
+        iconInactive: iconBagInactive,
         children: [
             {
                 label: 'List Bansos',
                 path: '/social-assistance',
+                permission: 'social-assistance-menu'
             },
             {
                 label: 'Pengajuan Bansos',
-                path: '/social-assistance-recipient'
+                path: '/social-assistance-recipient',
+                permission: 'social-assistance-recipient-menu'
             }
         ]
     },
