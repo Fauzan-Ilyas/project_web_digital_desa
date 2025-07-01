@@ -51,7 +51,7 @@ const filters = ref({
                         <span class="block sm:inline">{{ success }}</span>
 
                         <button type="button" @click="success = null" class="absolute top-1/2 -translate-y-1/2 right-4">
-                        <img src="@/@/assets/images/icons/close-circle-white.svg" class="flex size-6 shrink-0" alt="icon">
+                        <img src="@/assets/images/icons/close-circle-white.svg" class="flex size-6 shrink-0" alt="icon">
                         </button>
                     </div>
 
@@ -59,7 +59,7 @@ const filters = ref({
                         <span class="block sm:inline">{{ error }}</span>
 
                         <button type="button" @click="error = null" class="absolute top-1/2 -translate-y-1/2 right-4">
-                            <img src="@/@/assets/images/icons/close-circle-white.svg" class="flex size-6 shrink-0" alt="icon">
+                            <img src="@/assets/images/icons/close-circle-white.svg" class="flex size-6 shrink-0" alt="icon">
                         </button>
                     </div>
 

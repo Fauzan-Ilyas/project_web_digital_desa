@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Models\Development;
-use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -15,11 +14,11 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface {
         ?string $limit,
         bool $execute
     ) {
-        $query = Event::where(function ($query) use ($search) {
+        $query = Development::where(function ($query) use ($search) {
            if ($search) {
                $query->search($search);
            } 
-        });
+        })->with('developmentApplicants');
 
         $query->orderBy('created_at', 'desc');
 
@@ -49,7 +48,7 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface {
 
     public function getById(string $id)
     {
-        $query = Development::where('id', $id);
+        $query = Development::where('id', $id)->whith('developmentApplicants');
 
         return $query->first();
     }
@@ -62,7 +61,7 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface {
             $development->thumbnail = $data['thumbnail']->store('assets/developments', 'public');
             $development->name = $data['name'];
             $development->description = $data['description'];
-            $development->person_in_change = $data['person_in_change'];
+            $development->person_in_charge = $data['person_in_charge'];
             $development->start_date = $data['start_date'];
             $development->end_date = $data['end_date'];
             $development->amount = $data['amount'];
@@ -92,7 +91,7 @@ class DevelopmentRepository implements DevelopmentRepositoryInterface {
 
             $development->name = $data['name'];
             $development->description = $data['description'];
-            $development->person_in_change = $data['person_in_change'];
+            $development->person_in_charge = $data['person_in_charge'];
             $development->start_date = $data['start_date'];
             $development->end_date = $data['end_date'];
             $development->amount = $data['amount'];

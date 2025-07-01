@@ -1,7 +1,7 @@
 <script setup>
 import { useDashboardStore } from "@/stores/dashboard";
 import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
+import { onMounted, watch } from "vue";
 import { Chart } from "chart.js/auto";
 
 const dashboardStore = useDashboardStore();
@@ -19,7 +19,7 @@ const getResidentStatistic = () => {
           '#34613A',
           '#8EBD55',
           '#FA7139',
-          '#FBAD48',
+          '#FBAD48',          
         ],
       }]
     },
@@ -36,12 +36,31 @@ const getResidentStatistic = () => {
       },
     }
   });
-}
+};
 
-onMounted(() => {
-  fetchDashboardData()
-  getResidentStatistic()
-});
+const calculateAge = (dateString) => {
+  const today = new Date();
+  const birthDate = new Date(dateString);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+    age--;
+  }
+  return age;
+};
+
+watch(user, (newUser) => {
+  if (newUser?.role === 'admin') {
+    fetchDashboardData();
+    getResidentStatistic();
+  }
+
+  if (newUser?.role === 'head-of-family') {
+    fetchFamilyMember();
+    fetchSocialAssistanceRecipients();
+    fetchEventParticipants();
+  }
+}, { immediate: true });
 </script>
 
 <template>

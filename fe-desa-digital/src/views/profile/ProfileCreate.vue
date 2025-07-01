@@ -21,9 +21,12 @@ const { fetchProfile } = profileStore;
 
 const handleSubmit = async () => {
     await createProfile({
-        ...profile.value
-        images: profile.value.images.map((image) => image.image)
+  ...profile.value,
+    images: (profile.value.images || [])
+        .filter((img) => img && img.image)
+        .map((img) => img.image)
     });
+
 };
 
 const addImage = () => {

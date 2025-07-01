@@ -1,5 +1,7 @@
 import { defineStore } from 'pinia';
 import { axiosInstance } from '@/plugins/axios';
+import { handleError } from '@/helpers/errorHelper';
+import router from '@/router';
 
 export const useHeadOfFamilyStore = defineStore('head-Of-Family', {
     state: () => ({
@@ -75,7 +77,7 @@ export const useHeadOfFamilyStore = defineStore('head-Of-Family', {
         },
 
 
-        async fetchHeadOfFamily(id) {
+        async deleteHeadOfFamily(id) {
             this.loading = true
 
             try {

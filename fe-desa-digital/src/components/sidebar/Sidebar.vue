@@ -5,48 +5,84 @@ import SidebarItem from './SidebarItem.vue'
 import iconChartActive from '@/assets/images/icons/chart-square-dark-green.svg'
 import iconChartInactive from '@/assets/images/icons/chart-square-secondary-green.svg'
 
-// Icon Kepala Rumah
+// Icon Kepala Rumah & Anggota Keluarga
 import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg'
 import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg'
+
+// Icon Profile Desa
 import iconBuilding4Active from '@/assets/images/icons/building-4-dark-green.svg'
 import iconBuilding4Inactive from '@/assets/images/icons/building-4-secondary-green.svg'
+
+// Icon Bansos & Jadwal
+import iconBagActive from '@/assets/images/icons/bag-2-dark-green.svg'
+import iconBagInactive from '@/assets/images/icons/bag-2-secondary-green.svg'
 
 const sidebarItems = [
   {
     label: 'Dashboard',
     path: '/',
     iconActive: iconChartActive,
-    iconInactive: iconChartInactive
+    iconInactive: iconChartInactive,
+    permission: 'dashboard-menu'
   },
   {
     label: 'Kepala Rumah',
     path: '/head-of-family',
-    iconActive: iconCrownInactive,
-    iconInactive: iconCrownActive
+    iconActive: iconCrownActive,
+    iconInactive: iconCrownInactive,
+    permission: 'head-of-family-menu'
   },
-   {
+  {
+    label: 'Anggota Keluarga',
+    path: '/family-member',
+    iconActive: iconCrownActive,
+    iconInactive: iconCrownInactive,
+    permission: 'family-member-menu'
+  },
+  {
     label: 'Profile Desa',
     path: '/profile',
     iconActive: iconBuilding4Active,
     iconInactive: iconBuilding4Inactive,
+    permission: 'profile-menu'
+  },
+  {
+    label: 'Bantuan Sosial',
+    path: '',
+    iconActive: iconBagActive,
+    iconInactive: iconBagInactive,
+    children: [
+      {
+        label: 'List Bansos',
+        path: '/social-assistance',
+        permission: 'social-assistance-menu'
+      },
+      {
+        label: 'Pengajuan Bansos',
+        path: '/social-assistance-recipient',
+        permission: 'social-assistance-recipient-menu'
+      }
+    ]
   },
   {
     label: 'Jadwal Desa',
     path: '',
-    iconActive: iconBagactive,
+    iconActive: iconBagActive,
     iconInactive: iconBagInactive,
     children: [
       {
-        label: 'Pembagunan',
+        label: 'Pembangunan',
         path: '/development',
+        permission: 'development-list'
       },
       {
         label: 'Event Desa',
-        path: '/even',
+        path: '/event',
+        permission: 'event-list'
       }
     ]
   }
-];
+]
 </script>
 
 <template>
