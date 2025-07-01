@@ -34,7 +34,7 @@ onMounted(fetchData);
                             <h1 class="font-semibold text-2xl">Detail Event Desa</h1>
                         </div>
                         <RouterLink :to="{ name: 'edit-event ', params: { id: event.id }}"
-                            class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-black">
+                            class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-black"v-if="can('event-edit')">
                             <p class="font-medium text-white">Ubah Data</p>
                             <img src="@/@/assets/images/icons/edit-white.svg" class="flex size-6 shrink-0" alt="icon">
                         </RouterLink>

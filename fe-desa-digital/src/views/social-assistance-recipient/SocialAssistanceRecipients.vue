@@ -33,7 +33,7 @@ watch(serverOptions, () => {
 
 watch(filters, () => {
     debouncedFetchData()
-}, { deep: true })
+}, { deep: true });
 </script>
 
 <template>

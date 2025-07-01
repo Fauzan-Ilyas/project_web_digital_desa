@@ -41,7 +41,7 @@ const filters = ref({
 <template>
  <div id="Header" class="flex items-center justify-between">
                         <h1 class="font-semibold text-2xl">Events Desa</h1>
-                        <RouterLink :to-="{ name: 'create-event'}" class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-dark-green">
+                        <RouterLink :to-="{ name: 'create-event'}" class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-dark-green" v-if="can('create-event')">
                             <img src="@/assets/images/icons/add-square-white.svg" class="flex size-6 shrink-0" alt="icon">
                             <p class="font-medium text-white">Add New</p>
                         </RouterLink>

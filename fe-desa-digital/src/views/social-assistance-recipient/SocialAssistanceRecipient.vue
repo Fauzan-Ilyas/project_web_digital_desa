@@ -5,6 +5,8 @@ import { useSosialAssistanceRecipientStore } from '@/stores/socialAssistanceReci
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
+import { useAuthStore } from '@/stores/auth'; // atau path yang sesuai
+
 
 const route = useRoute();
 
@@ -21,11 +23,14 @@ const socialAssistanceRecipient = ref({
     status: null
 });
 
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
+
 const socialAssistanceRecipientStore = useSosialAssistanceRecipientStore();
 const { loading, error, success } = storeToRefs(socialAssistanceRecipientStore)
 const { fetchSocialAssistanceRecipient, updateSocialAssistanceRecipient } = socialAssistanceRecipientStore
 
-const fetchData = async () => {
+    const fetchData = async () => {
     const response = await fetchSocialAssistanceRecipient(route.params.id);
 
     socialAssistanceRecipient.value = response
@@ -120,7 +125,7 @@ onMounted(fetchData);
                     <img src="@/assets/images/icons/money-dark-green.svg" class="flex size-6 shrink-0" alt="icon">
                 </div>
                 <div class="flex flex-col gap-1 w-full">
-                    <p class="font-semibold text-lg leading-[22.5px] text-desa-dark-green">Rp {{ formatRupiah (socialAssistanceRecipient.social_assistance?.name) }}</p>
+                    <p class="font-semibold text-lg leading-[22.5px] text-desa-dark-green">Rp {{ formatRupiah(socialAssistanceRecipient.social_assistance?.amount) }}</p>
                     <span class="font-medium text-desa-secondary">
                         Uang Tunai
                     </span>
@@ -154,10 +159,12 @@ onMounted(fetchData);
             <div class="flex flex-col gap-3">
                 <p class="font-medium text-sm text-desa-secondary">Tentang Bantuan</p>
                 <p class="font-medium leading-8">
-                    {{ socialAssistanceRecipient.social_assistance?.description || 'Tidak ada deskripsi' }}
+                    {{ socialAssistanceRecipient.social_assistance?.description }}
                 </p>
             </div>
         </section>
+
+
         <section class="flex flex-col flex-1 h-fit shrink-0 rounded-3xl p-6 gap-6 bg-white">
             <p class="font-medium leading-5 text-desa-secondary">Detail Pengajuan</p>
             <div class="flex items-center gap-3 w-[302px] shrink-0">
@@ -224,12 +231,12 @@ onMounted(fetchData);
                 <p class="font-medium text-sm text-desa-secondary">Rekening Kepala Rumah</p>
                 <div class="flex items-center gap-3">
                     <div class="flex w-[120px] h-[60px] rounded-2xl border border-desa-background py-3 px-0.5 items-center justify-center bg-desa-blue/10 overflow-hidden">
-                        <img src="@/assets/images/logos/bca.svg" class="w-full h-full object-contain" alt="icon" 
+                        <img src="@/assets/images/thumbnails/kk-bca.png" class="w-full h-full object-contain" alt="icon" 
                             v-if="socialAssistanceRecipient.bank === 'bca'">
-                        <img src="@/assets/images/logos/bca.svg" class="w-full h-full object-contain" alt="icon" 
-                            v-if="socialAssistanceRecipient.bank === 'bri'">
-                        <img src="@/assets/images/logos/bca.svg" class="w-full h-full object-contain" alt="icon" 
+                        <img src="@/assets/images/thumbnails/kk-bni.png" class="w-full h-full object-contain" alt="icon" 
                             v-if="socialAssistanceRecipient.bank === 'bni'">
+                        <img src="@/assets/images/thumbnails/kk-mandiri.png" class="w-full h-full object-contain" alt="icon" 
+                            v-if="socialAssistanceRecipient.bank === 'mandiri'">
                     </div>
                     <div>
                         <p class="font-medium text-sm text-desa-secondary">{{ socialAssistanceRecipient.head_of_family?.user?.name }}</p>
@@ -274,5 +281,85 @@ onMounted(fetchData);
                 </div>
             </form>
         </section>
+
+        <div class="flex-1 flex flex-col h-fit gap-[14px] w-[418px]" v-if="user?.role === 'head-of-family'">
+            <div class="rounded-2xl bg-white p-6 flex flex-col gap-6">
+                <section id="Status-Pengajuan" class="flex items-center justify-between">
+                <h2 class="font-medium text-sm leading-[17.5px] text-desa-secondary">Status Pengajuan</h2>
+                <div class="flex gap-2">
+                    <span
+                    class="group [&.pending]:flex hidden rounded-full py-[12px] w-[100px] justify-center bg-desa-yellow text-white text-xs font-semibold"
+                    :class="socialAssistanceRecipient.status">
+                    Menunggu
+                    </span>
+                    <span
+                    class="group [&.rejected]:flex hidden rounded-full py-[12px] w-[100px] justify-center bg-desa-red text-white text-xs font-semibold"
+                    :class="socialAssistanceRecipient.status">
+                    Ditolak
+                    </span>
+                    <span
+                    class="group [&.approved]:flex hidden rounded-full py-[12px] w-[100px] justify-center bg-desa-dark-green text-white text-xs font-semibold"
+                    :class="socialAssistanceRecipient.status">
+                    Disetujui
+                    </span>
+                </div>
+                </section>
+
+                <hr class="border-desa-background" />
+
+                <section id="Bukti-Menerima-Bansos" class="flex flex-col gap-4">
+                <h2 class="font-medium text-sm leading-[17.5px] text-desa-secondary">Bukti Menerima Bansos</h2>
+                <div class="relative flex justify-center items-center w-full h-[230px] overflow-hidden rounded-2xl">
+                    <div class="square-dashed w-full h-[230px] flex justify-center items-center"  v-if="!socialAssistanceRecipient.proof">
+                        <p class="text-center w-[240px] font-medium text-xs leading-[19.2px] text-[#ACB9BB]">
+                            Gambar akan muncul jika status pengajuan sudah berhasil 🥳📸
+                        </p>
+                    </div>
+                    <img :src="socialAssistanceRecipient.proof" alt="image" class="bukti-menerima-bansos absolute left-0 top-0 w-full h-full object-cover" v-if="socialAssistanceRecipient.proof" />
+                </div>
+                </section>
+            </div>
+
+            <div class="flex flex-col gap-6 rounded-2xl bg-white p-6">
+                <section id="Detail-Pengajuan" class="flex flex-col gap-6">
+                    <h2 class="font-medium text-sm leading-[17.5px] text-desa-secondary">Detail Pengajuan</h2>
+
+                    <div class="point flex items-center gap-3">
+                    <div class="p-[14px] shrink-0 bg-desa-foreshadow rounded-2xl">
+                        <img src="@/assets/images/icons/receive-square-2-dark-green.svg" alt="icon" class="size-6 shrink-0" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <p class="font-semibold text-lg leading-[22.5px] text-desa-dark-green">
+                        Rp {{ formatRupiah(socialAssistanceRecipient.amount) }}
+                        </p>
+                        <h3 class="font-medium text-sm leading-[17.5px] text-desa-secondary">Nominal Pengajuan</h3>
+                    </div>
+                    </div>
+
+                    <hr class="border-desa-background" />
+
+                    <div class="point flex items-center gap-3">
+                    <div class="p-[14px] shrink-0 bg-desa-foreshadow rounded-2xl">
+                        <img src="@/assets/images/icons/calendar-2-dark-green.svg" alt="icon" class="size-6 shrink-0" />
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <p class="font-semibold text-lg leading-[22.5px]">
+                        {{ formatToClientTimezone(socialAssistanceRecipient.created_at) }}
+                        </p>
+                        <h3 class="font-medium text-sm leading-[17.5px] text-desa-secondary">Tanggal Pengajuan</h3>
+                    </div>
+                    </div>
+
+                    <hr class="border-desa-background" />
+                </section>
+
+                <section id="Pesan-Pengajuan" class="flex flex-col gap-1">
+                    <h2 class="font-medium text-sm leading-[17.5px] text-desa-secondary">Pesan Pengajuan:</h2>
+                    <p class="font-medium leading-8">{{ socialAssistanceRecipient.reason }}</p>
+                </section>
+            </div>
+
+        </div>
+
     </div>
 </template>
