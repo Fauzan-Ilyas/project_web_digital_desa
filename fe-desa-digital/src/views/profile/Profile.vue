@@ -1,5 +1,5 @@
 <script setup>
-import { profileStore } from "@/stores/profile";
+import { useprofileStore } from "@/stores/profile";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 
@@ -11,9 +11,9 @@ const showModalImage = ref(false);
 const selectImage = (index) => {
     showModalImage.value = true;
 
-    setTimout(() => {
-        const selectImage = document.getElementById('select-image');
-        selectedImage.src = profile.value.images[index].image;
+    setTimeout(() => {
+    const selectedImage = document.getElementById('Selected-Image');
+    selectedImage.src = profile.value.profile_images[index].image;
     }, 100);
 }
 

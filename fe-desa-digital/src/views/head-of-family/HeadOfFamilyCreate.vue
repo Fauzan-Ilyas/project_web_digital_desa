@@ -2,7 +2,7 @@
 import { useHeadOfFamilyStore } from '@/stores/headOfFamily';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue';
-import Input from '@/components/input.vue';
+import Input from '@/components/ui/input.vue';
 
 import IconProfileSecondaryGreen from '@/assets/images/icons/user-secondary-green.svg';
 import IconProfileBlack from '@/assets/images/icons/user-black.svg';

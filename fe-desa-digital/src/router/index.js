@@ -19,7 +19,7 @@ import SocialAssistances from "@/views/social-assistance/SocialAssistances.vue";
 import SocialAssistance from "@/views/social-assistance/SocialAssistance.vue";
 import SocialAssistanceEdit from "@/views/social-assistance/SocialAssistanceEdit.vue";
 import SocialAssistanceCreate from "@/views/social-assistance/SocialAssistanceCreate.vue";
-import SocialAssistanceRecipients from "@/views/social-assistance/SocialAssistanceRecipients.vue";
+import SocialAssistanceRecipients from "@/views/social-assistance-recipient/SocialAssistanceRecipients.vue";
 
 import Developments from "@/views/development/Developments.vue";
 import Development from "@/views/development/Development.vue";

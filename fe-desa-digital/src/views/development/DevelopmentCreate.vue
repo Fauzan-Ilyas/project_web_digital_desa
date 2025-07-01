@@ -207,12 +207,12 @@ watch(() => development.value.day, (newDay) => {
             </span>
             <div class="flex size-6 shrink-0">
               <img
-                src="assets/images/icons/tick-circle-secondary-green.svg"
+                src="@/assets/images/icons/tick-circle-secondary-green.svg"
                 class="size-6 flex group-has-[:checked]:hidden"
                 alt="icon"
               />
               <img
-                src="assets/images/icons/tick-circle-dark-green.svg"
+                src="@/assets/images/icons/tick-circle-dark-green.svg"
                 class="size-6 hidden group-has-[:checked]:flex"
                 alt="icon"
               />
@@ -236,12 +236,12 @@ watch(() => development.value.day, (newDay) => {
             </span>
             <div class="flex size-6 shrink-0">
               <img
-                src="assets/images/icons/close-circle-secondary-green.svg"
+                src="@/assets/images/icons/close-circle-secondary-green.svg"
                 class="size-6 flex group-has-[:checked]:hidden"
                 alt="icon"
               />
               <img
-                src="assets/images/icons/close-circle-secondary-green.svg"
+                src="@/assets/images/icons/close-circle-secondary-green.svg"
                 class="size-6 hidden group-has-[:checked]:flex"
                 alt="icon"
               />
@@ -291,12 +291,12 @@ watch(() => development.value.day, (newDay) => {
               class="absolute transform -translate-y-1/2 top-1/2 left-4 flex size-6 shrink-0"
             >
               <img
-                src="assets/images/icons/timer-secondary-green.svg"
+                src="@/assets/images/icons/timer-secondary-green.svg"
                 class="size-6 hidden group-has-[:placeholder-shown]:flex"
                 alt="icon"
               />
               <img
-                src="assets/images/icons/timer-black.svg"
+                src="@/assets/images/icons/timer-black.svg"
                 class="size-6 flex group-has-[:placeholder-shown]:hidden"
                 alt="icon"
               />

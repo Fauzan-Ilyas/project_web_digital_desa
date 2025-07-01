@@ -7,17 +7,17 @@ import { debounce } from "lodash";
 import Pagination from "@/components/ui/Pagination.vue";
 
 const developmentStore = useDevelopmentStore();
-const { developments, meta, loading, error, success } =
-  storeToRefs(developmentStore);
+const { developments, meta, loading, error, success } = storeToRefs(developmentStore);
 const { fetchDevelopmentsPaginated } = developmentStore;
 
 const serverOptions = ref({
   page: 1,
-  row_per_page: 10
+  row_per_page: 10,
 });
 
 const filters = ref({
-  search: null
+  search: null,
+  status: null,
 });
 
 const fetchData = async () => {
@@ -64,21 +64,68 @@ watch(
     </RouterLink>
   </div>
 
-  <div v-if="success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-2xl relative mb-4" role="alert">
+  <div
+    v-if="success"
+    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-2xl relative mb-4"
+    role="alert"
+  >
     <span class="block sm:inline">{{ success }}</span>
 
-    <button type="button" @click="success = null" class="absolute top-1/2 -translate-y-1/2 right-4">
-      <img src="@/assets/images/icons/close-circle-white.svg" class="flex size-6 shrink-0" alt="icon">
+    <button
+      type="button"
+      @click="success = null"
+      class="absolute top-1/2 -translate-y-1/2 right-4"
+    >
+      <img
+        src="@/assets/images/icons/close-circle-white.svg"
+        class="flex size-6 shrink-0"
+        alt="icon"
+      />
     </button>
   </div>
 
-  <div v-if="error" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-2xl relative mb-4" role="alert">
+  <div
+    v-if="error"
+    class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-2xl relative mb-4"
+    role="alert"
+  >
     <span class="block sm:inline">{{ error }}</span>
 
-    <button type="button" @click="error = null" class="absolute top-1/2 -translate-y-1/2 right-4">
-        <img src="@/assets/images/icons/close-circle-white.svg" class="flex size-6 shrink-0" alt="icon">
+    <button
+      type="button"
+      @click="error = null"
+      class="absolute top-1/2 -translate-y-1/2 right-4"
+    >
+      <img
+        src="@/assets/images/icons/close-circle-white.svg"
+        class="flex size-6 shrink-0"
+        alt="icon"
+      />
     </button>
   </div>
+
+  <section
+    id="TabButtons"
+    class="w-full p-1 bg-desa-foreshadow rounded-full grid grid-cols-2 gap-3"
+  >
+    <button type="button" data-content="All" :class="['tab-btn', 'group', { active: !filters.status }]">
+      <div
+        class="group-[.active]:bg-desa-dark-green group-[.active]:text-white rounded-full py-[18px] flex justify-center items-center text-center text-desa-dark-green font-medium leading-5 transition-all duration-300"
+        @click="filters.status = null"
+      >
+        <span>Semua Pembangunan</span>
+      </div>
+    </button>
+    <button type="button" data-content="My-applications" :class="['tab-btn', 'group', { active: filters.status === 'my_applications' }]"
+      >
+      <div
+        class="group-[.active]:bg-desa-dark-green group-[.active]:text-white rounded-full py-[18px] flex justify-center items-center text-center text-desa-dark-green font-medium leading-5 transition-all duration-300"
+        @click="filters.status = 'my_applications'"
+      >
+        <span>My Applications</span>
+      </div>
+    </button>
+  </section>
 
   <section id="List-Pembangunan-Desa" class="flex flex-col gap-[14px]">
     <form id="Page-Search" class="flex items-center justify-between">
@@ -144,7 +191,12 @@ watch(
       </div>
     </form>
 
-    <CardList v-for="development in developments" :key="development.id" :item="development" v-if="!loading" />
+    <CardList
+      v-for="development in developments"
+      :key="development.id"
+      :item="development"
+      v-if="!loading"
+    />
     <Pagination :meta="meta" :serverOptions="serverOptions" />
   </section>
 </template>

@@ -1,6 +1,6 @@
 <script setup>
     import CardList from '@/components/head-of-family/CardList.vue';
-    import { useHeadOfFamilyStore } from '@/stores/head-of-family';
+    import { useHeadOfFamilyStore } from '@/views/head-of-family/HeadOfFamily.vue';
     import { storeToRefs } from 'pinia';
     import { onMounted } from 'vue';
     import { debounce } from 'lodash';
