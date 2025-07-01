@@ -106,7 +106,7 @@ onMounted(fetchData);
         @click="showModalDelete = true"
         data-modal="Modal-Delete"
         class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-red"
-      >
+       v-if="can('development-delete')">
         <p class="font-medium text-white">Hapus Data</p>
         <img
           src="@/assets/images/icons/trash-white.svg"
@@ -117,7 +117,7 @@ onMounted(fetchData);
       <RouterLink
         :to="{ name: 'development-edit', params: { id: development.id } }"
         class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-black"
-      >
+      v-if="can('development-edit')">
         <p class="font-medium text-white">Ubah Data</p>
         <img
           src="@/assets/images/icons/edit-white.svg"
@@ -440,10 +440,8 @@ onMounted(fetchData);
                   </p>
                 </div>
               </div>
-              <div
-                class="flex items-center gap-3 justify-end shrink-0"
-                v-if="applicant.status === 'pending'"
-              >
+              <div class="flex items-center gap-3 justify-end shrink-0"
+                v-if="applicant.status === 'pending' && can('development-applicant-edit')">
                 <button
                   class="flex items-center w-[120px] justify-center shrink-0 gap-[10px] rounded-2xl py-4 px-6 bg-desa-red/10"
                 >
