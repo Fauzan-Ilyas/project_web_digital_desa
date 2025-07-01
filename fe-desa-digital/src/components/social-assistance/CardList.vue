@@ -1,4 +1,11 @@
 <script setup>
+import { formatRupiah } from '@/helpers/format';
+import { useAuthStore } from '@/strores/auth';
+import { storeToRefs } from 'pinia';
+
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
+
 defineProps({
     item: {
         type: Object,
@@ -22,7 +29,9 @@ defineProps({
                                 </div>
                                 <RouterLink :to="{ name: 'manage-social-assistance', params: {   id:item.id } }"
                                 class="flex items-center shrink-0 gap-[10px] rounded-2xl py-4 px-6 bg-desa-black">
-                                    <span class="font-medium text-white">Manage</span>
+                                    <span class="font-medium text-white" v-if="user?.role === 'admin'">Manage</span>
+                                    <span class="font-medium text-white" v-else>View Details</span>
+
                                 </RouterLink>
                             </div>
                             <hr class="border-desa-background">

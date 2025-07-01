@@ -1,5 +1,7 @@
 <script setup>
+import { can } from "@/helpers/permissionHelper";
 import { profileStore } from "@/stores/profile";
+import { create } from "lodash";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 
@@ -28,7 +30,7 @@ onMounted(fetchProfile);
                         <h1 class="font-semibold text-2xl">Profile Desa</h1>
                     </div>
                     <RouterLink :to="{ name: 'create-profile' }"
-                        class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-dark-green">
+                        class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-dark-green" v-if="can(profile-create)">
                         <p class="font-medium text-white">Create Profile</p>
                         <img src="@/assets/images/icons/add-square-white.svg" class="flex size-6 shrink-0" alt="icon">
                     </RouterLink>
@@ -47,7 +49,8 @@ onMounted(fetchProfile);
                         <h1 class="font-semibold text-2xl">Profile Desa</h1>
                     </div>
                     <a href="kd-profile-desa-edit.html"
-                        class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-black">
+                        class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-black" 
+                        v-if="can(profile-edit)">
                         <p class="font-medium text-white">Ubah Data</p>
                         <img src="@/assets/images/icons/edit-white.svg" class="flex size-6 shrink-0" alt="icon">
                     </a>
