@@ -5,13 +5,15 @@ import SidebarItem from './SidebarItem.vue'
 import iconChartActive from '@/assets/images/icons/chart-square-dark-green.svg'
 import iconChartInactive from '@/assets/images/icons/chart-square-secondary-green.svg'
 
-// Icon Kepala Rumah & Profile Desa
+// Icon Kepala Rumah & Anggota Keluarga
 import iconCrownActive from '@/assets/images/icons/crown-dark-green.svg'
 import iconCrownInactive from '@/assets/images/icons/crown-secondary-green.svg'
+
+// Icon Profile Desa
 import iconBuilding4Active from '@/assets/images/icons/building-4-dark-green.svg'
 import iconBuilding4Inactive from '@/assets/images/icons/building-4-secondary-green.svg'
 
-// Icon Bansos dan Jadwal (pakai iconBag sebagai contoh)
+// Icon Bansos & Jadwal
 import iconBagActive from '@/assets/images/icons/bag-2-dark-green.svg'
 import iconBagInactive from '@/assets/images/icons/bag-2-secondary-green.svg'
 
@@ -20,19 +22,29 @@ const sidebarItems = [
     label: 'Dashboard',
     path: '/',
     iconActive: iconChartActive,
-    iconInactive: iconChartInactive
+    iconInactive: iconChartInactive,
+    permission: 'dashboard-menu'
   },
   {
     label: 'Kepala Rumah',
     path: '/head-of-family',
     iconActive: iconCrownActive,
-    iconInactive: iconCrownInactive
+    iconInactive: iconCrownInactive,
+    permission: 'head-of-family-menu'
+  },
+  {
+    label: 'Anggota Keluarga',
+    path: '/family-member',
+    iconActive: iconCrownActive,
+    iconInactive: iconCrownInactive,
+    permission: 'family-member-menu'
   },
   {
     label: 'Profile Desa',
     path: '/profile',
     iconActive: iconBuilding4Active,
-    iconInactive: iconBuilding4Inactive
+    iconInactive: iconBuilding4Inactive,
+    permission: 'profile-menu'
   },
   {
     label: 'Bantuan Sosial',
@@ -42,11 +54,13 @@ const sidebarItems = [
     children: [
       {
         label: 'List Bansos',
-        path: '/social-assistance'
+        path: '/social-assistance',
+        permission: 'social-assistance-menu'
       },
       {
         label: 'Pengajuan Bansos',
-        path: '/social-assistance-recipient'
+        path: '/social-assistance-recipient',
+        permission: 'social-assistance-recipient-menu'
       }
     ]
   },
@@ -58,7 +72,13 @@ const sidebarItems = [
     children: [
       {
         label: 'Pembangunan',
-        path: '/development'
+        path: '/development',
+        permission: 'development-list'
+      },
+      {
+        label: 'Event Desa',
+        path: '/event',
+        permission: 'event-list'
       }
     ]
   }

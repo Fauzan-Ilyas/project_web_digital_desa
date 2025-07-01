@@ -11,6 +11,10 @@ import HeadOfFamilies from "@/views/head-of-family/HeadOfFamilies.vue";
 import HeadOfFamily from "@/views/head-of-family/HeadOfFamily.vue";
 import HeadOfFamilyCreate from "@/views/head-of-family/HeadOfFamilyCreate.vue";
 
+import FamilyMembers from "@/views/family-member/FamilyMembers.vue";
+import FamilyMember from "@/views/family-member/FamilyMember.vue";
+import FamilyMemberCreate from "@/views/family-member/FamilyMemberCreate.vue";
+
 import SocialAssistances from "@/views/social-assistance/SocialAssistances.vue";
 import SocialAssistance from "@/views/social-assistance/SocialAssistance.vue";
 import SocialAssistanceEdit from "@/views/social-assistance/SocialAssistanceEdit.vue";
@@ -24,6 +28,11 @@ import DevelopmentCreate from "@/views/development/DevelopmentCreate.vue";
 
 import Profile from "@/views/profile/Profile.vue";
 import ProfileCreate from "@/views/profile/ProfileCreate.vue";
+
+import Events from "@/views/event/Events.vue";
+import Event from "@/views/event/Event.vue";
+import EventEdit from "@/views/event/EventEdit.vue";
+import EventCreate from "@/views/event/EventCreate.vue";
 
 import Error403 from "@/views/Error403.vue";
 import NotFound from "@/views/NotFound.vue";
@@ -40,6 +49,24 @@ const router = createRouter({
           name: "dashboard",
           component: Dashboard,
           meta: { requiresAuth: true, permission: "dashboard-menu" },
+        },
+        {
+          path: "family-member",
+          name: "family-member",
+          component: FamilyMembers,
+          meta: { requiresAuth: true, permission: "family-member-list" },
+        },
+        {
+          path: "family-member/:id",
+          name: "manage-family-member",
+          component: FamilyMember,
+          meta: { requiresAuth: true, permission: "family-member-list" },
+        },
+        {
+          path: "family-member/create",
+          name: "create-family-member",
+          component: FamilyMemberCreate,
+          meta: { requiresAuth: true, permission: "family-member-create" },
         },
         {
           path: "head-of-family",
@@ -136,6 +163,30 @@ const router = createRouter({
           name: "create-profile",
           component: ProfileCreate,
           meta: { requiresAuth: true, permission: "profile-create" },
+        },
+        {
+          path: "event",
+          name: "event",
+          component: Events,
+          meta: { requiresAuth: true, permission: "event-list" },
+        },
+        {
+          path: "event/:id",
+          name: "manage-event",
+          component: Event,
+          meta: { requiresAuth: true, permission: "event-list" },
+        },
+        {
+          path: "event/edit/:id",
+          name: "edit-event",
+          component: EventEdit,
+          meta: { requiresAuth: true, permission: "event-edit" },
+        },
+        {
+          path: "event/create",
+          name: "create-event",
+          component: EventCreate,
+          meta: { requiresAuth: true, permission: "event-create" },
         },
       ],
     },
