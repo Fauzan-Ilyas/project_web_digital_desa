@@ -1,5 +1,10 @@
 <script setup>
 import { formatRupiah, formatToClientTimezone } from '@/helpers/format';
+import { useAuthStore } from '@/strores/auth';
+import { storeToRefs } from 'pinia';
+
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
 
 defineProps({
     item: {
@@ -86,9 +91,10 @@ defineProps({
             </div>
             <div class="flex items-center gap-3 justify-end w-[252px] shrink-0">
                 <RouterLink :to="{ name: 'manage-social-assistance-recipient', params: { id: item.id } }">
-                    <span class="font-medium text-white">Manage</span>
+                    <span class="font-medium text-white" v-if="user?.role === 'admin'">Manage</span>
+                    <span class="font-medium text-white" v-else>View Details</span>
                 </RouterLink>
             </div>
         </div>
     </div>
-</template>
+</template> 

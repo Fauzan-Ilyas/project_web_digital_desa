@@ -54,7 +54,7 @@ watch(
     <RouterLink
       :to="{ name: 'create_develpoment' }"
       class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-dark-green"
-    >
+      v-if="can('development-create')">
       <img
         src="@/assets/images/icons/add-square-white.svg"
         class="flex size-6 shrink-0"
