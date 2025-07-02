@@ -1,12 +1,31 @@
 <script setup>
-import { useDashboardStore } from "@/stores/dashboard";
-import { storeToRefs } from "pinia";
-import { onMounted, watch } from "vue";
-import { Chart } from "chart.js/auto";
+// import { useDashboardStore } from "@/stores/dashboard";
+// import { storeToRefs } from "pinia";
+// import { onMounted, watch } from "vue";
+// import { Chart } from "chart.js/auto";
+// import { useFamilyMemberStore } from "@/stores/familyMember"; 
+import { useSocialAssistanceRecipientStore } from '@/stores/socialAssistanceRecipient';
+import { formatRupiah, formatToClientTimezone } from '@/helpers/format';
+import { useEventParticipantStore } from '@/stores/eventParticipant';
 
 const dashboardStore = useDashboardStore();
 const { dashboardData, loading } = storeToRefs(dashboardStore);
 const { fetchDashboardData } = dashboardStore;
+
+const familyMemberStore = useFamilyMemberStore()
+const { familyMembers, loading: loadingFamilyMember } = storeToRefs(familyMemberStore)
+const { fetchFamilyMember } = familyMemberStore
+
+const socialAssistanceRecipientStore = socialAssistanceRecipientStore()
+const { socialAssistanceRecipients, loading: loadingSocialAssistanceRecipients } = storeToRefs(socialAssistanceRecipientStore)
+const { fetchSocialAssistanceRecipients } = socialAssistanceRecipientStore
+
+const eventParticipantsStore = useEventParticipantStore()
+const { eventParticipants, loading: loadingEventParticipants } = storeToRefs(eventParticipantsStore)
+const { fetchEventParticipants } = eventParticipantsStore
+
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
 
 const getResidentStatistic = () => {
   const chart = document.getElementById('myChart');
@@ -57,7 +76,7 @@ watch(user, (newUser) => {
 
   if (newUser?.role === 'head-of-family') {
     fetchFamilyMember();
-    fetchSocialAssistanceRecipients();
+    fetchSocialAssistanceRecipients(); 
     fetchEventParticipants();
   }
 }, { immediate: true });
