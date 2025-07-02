@@ -5,10 +5,15 @@ import { storeToRefs } from 'pinia'
 import { onMounted, watch } from 'vue'
 import { debounce } from 'lodash'
 import Pagination from '@/components/ui/Pagination.vue'
+import { useAuthStore } from '@/stores/auth'
+import { can } from '@/helpers/permissionHelper'
 
 const eventStore = useDevelopmentStore()
 const { event, meta, loading, error, success } = storeToRefs(eventStore)
-const { fetchEventPaginated } = eventtore
+const { fetchEventPaginated } = eventStore
+
+const authStore = useAuthStore();
+const { user } = storeToRefs(authStore);
 
 const serverOptions = ref({
   page: 1,
@@ -16,7 +21,8 @@ const serverOptions = ref({
 })
 
 const filters = ref({
-  search: null
+  search: null,
+  status: null,
 })
 
     const fetchData = async () => {
@@ -62,6 +68,22 @@ const filters = ref({
                             <img src="@/assets/images/icons/close-circle-white.svg" class="flex size-6 shrink-0" alt="icon">
                         </button>
                     </div>
+
+                    <section id="TabButtons"
+                        class="w-full p-1 bg-desa-foreshadow rounded-full grid grid-cols-2 gap-3" >
+                        <button type="button" data-content="All" :class="['tab-btn', 'group', { active: !filters.status }]">
+                        <div class="group-[.active]:bg-desa-dark-green group-[.active]:text-white rounded-full py-[18px] flex justify-center items-center text-center text-desa-dark-green font-medium leading-5 transition-all duration-300" 
+                            @click="filters.status = null" >
+                            <span>Semua Event</span>
+                        </div>
+                        </button>
+                        <button type="button" data-content="joined" :class="['tab-btn', 'group', { active: filters.status === 'my_applications' }]" >
+                        <div class="group-[.active]:bg-desa-dark-green group-[.active]:text-white rounded-full py-[18px] flex justify-center items-center text-center text-desa-dark-green font-medium leading-5 transition-all duration-300"
+                            @click="filters.status = 'joined'" >
+                            <span>Joined</span>
+                        </div>
+                        </button>
+                    </section>
 
                     <section id="List-Event-Desa" class="flex flex-col gap-[14px]">
                         <form id="Page-Search" class="flex items-center justify-between">
