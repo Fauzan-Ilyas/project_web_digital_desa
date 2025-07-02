@@ -23,7 +23,7 @@ export const useFamilyMemberStore = defineStore('family-member', {
             try {
                 const response = await axiosInstance.get('family-member', { params })
 
-                this.headOfFamilies= response.data.data;
+                this.familyMembers= response.data.data;
             } catch (error) {
                 this.error = handleError(error)
             }finally {
