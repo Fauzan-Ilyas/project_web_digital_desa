@@ -36,7 +36,7 @@ onMounted(fetchData);
                         <RouterLink :to="{ name: 'edit-event ', params: { id: event.id }}"
                             class="flex items-center rounded-2xl py-4 px-6 gap-[10px] bg-desa-black"v-if="can('event-edit')">
                             <p class="font-medium text-white">Ubah Data</p>
-                            <img src="@/@/assets/images/icons/edit-white.svg" class="flex size-6 shrink-0" alt="icon">
+                            <img src="@/assets/images/icons/edit-white.svg" class="flex size-6 shrink-0" alt="icon">
                         </RouterLink>
                     </div>
                         <!-- alert -->
@@ -66,7 +66,7 @@ onMounted(fetchData);
                                 <div class="flex flex-col gap-[6px] w-full ml-4 mr-9">
                                     <p class="font-semibold text-lg leading-[22.5px] line-clamp-1">{{ event.name }}</p>
                                     <div class="flex items-center gap-1">
-                                        <img src="@/@/assets/images/icons/ticket-secondary-green.svg" class="flex size-[18px] shrink-0" alt="icon">
+                                        <img src="@/assets/images/icons/ticket-secondary-green.svg" class="flex size-[18px] shrink-0" alt="icon">
                                         <p class="font-medium text-sm text-desa-secondary">
                                             Registration: 
                                             <span class="font-medium text-base text-desa-dark-green" v-if="event.is_available">
@@ -82,7 +82,7 @@ onMounted(fetchData);
                             <hr class="border-desa-foreshadow">
                             <div class="flex items-center w-full gap-3">
                                 <div class="flex size-[52px] shrink-0 rounded-2xl bg-desa-red/10 items-center justify-center">
-                                    <img src="@/@/assets/images/icons/ticket-2-red.svg" class="flex size-6 shrink-0" alt="icon">
+                                    <img src="@/assets/images/icons/ticket-2-red.svg" class="flex size-6 shrink-0" alt="icon">
                                 </div>
                                 <div class="flex flex-col gap-1 w-full">
                                     <p class="font-semibold text-lg leading-[22.5px] text-desa-red">Rp {{ formatRupiah(event.price) }}</p>

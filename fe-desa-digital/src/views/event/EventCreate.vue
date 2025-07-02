@@ -180,12 +180,12 @@ import Input from '@/components/ui/Input.vue'
                 </span>
                 <div class="flex size-6 shrink-0">
                 <img
-                    src="assets/images/icons/tick-circle-secondary-green.svg"
+                    src="@/assets/images/icons/tick-circle-secondary-green.svg"
                     class="size-6 flex group-has-[:checked]:hidden"
                     alt="icon"
                 />
                 <img
-                    src="assets/images/icons/tick-circle-dark-green.svg"
+                    src="@/assets/images/icons/tick-circle-dark-green.svg"
                     class="size-6 hidden group-has-[:checked]:flex"
                     alt="icon"
                 />
@@ -209,12 +209,12 @@ import Input from '@/components/ui/Input.vue'
                 </span>
                 <div class="flex size-6 shrink-0">
                 <img
-                    src="assets/images/icons/close-circle-secondary-green.svg"
+                    src="@/assets/images/icons/close-circle-secondary-green.svg"
                     class="size-6 flex group-has-[:checked]:hidden"
                     alt="icon"
                 />
                 <img
-                    src="assets/images/icons/close-circle-secondary-green.svg"
+                    src="@/assets/images/icons/close-circle-secondary-green.svg"
                     class="size-6 hidden group-has-[:checked]:flex"
                     alt="icon"
                 />

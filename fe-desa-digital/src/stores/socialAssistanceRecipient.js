@@ -17,6 +17,19 @@ export const useSocialAssistanceRecipientStore = defineStore('social-assistance-
         success: null
     }),
     actions: {
+        async fetchSocialAssistanceRecipients(page = 1) {
+            this.loading = true
+
+            try {
+                const response = await axiosInstance.get(`social-assistance-recipient`, { params })
+
+                this.socialAssistanceRecipients = response.data.data
+            } catch (error) {
+                this.error = handleError(error)
+            } finally {
+                this.loading = false
+            }
+        },
         async fetchSocialAssistanceRecipientsPaginated(page = 1) {
             this.loading = true
 
@@ -45,6 +58,21 @@ export const useSocialAssistanceRecipientStore = defineStore('social-assistance-
                 this.loading = false
             }
         },
+        async createSocialAssistanceRecipient(payload) {
+         this.loading = true
+
+            try {
+              const response = await axiosInstance.post("/social-assistance-recipient", payload)
+
+            this.success = response.data.message
+
+            router.push({ name: 'social-assistance-recipient' })
+            } catch (error) {
+               this.error = handleError(error)
+            } finally {
+             this.loading = false
+            }
+            },
 
         async updateSocialAssistanceRecipient(playload) {
             this.loading = true

@@ -47,8 +47,8 @@ const emit = defineEmits(['update:modelValue']);
             <h2 class="font-medium leading-5 text-desa-secondary">Email Address</h2>
             <div class="relative">
                 <input placeholder="Masukan Email Kamu" type="email" class="peer w-full h-[56px] rounded-2xl pl-[48px] pr-4 border-[1.5px] border-desa-background font-medium leading-5 focus:ring-[1.5px] focus:ring-desa-dark-green focus:outline-none placeholder:leading-5 placeholder:text-desa-secondary placeholder:font-medium transition-all duration-300" />
-                <img src="assets/images/icons/user-secondary-green.svg" alt="icon" class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-0 peer-placeholder-shown:opacity-100 transition-all duration-300" />
-                <img src="assets/images/icons/user-black.svg" alt="icon" class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-100 peer-placeholder-shown:opacity-0 transition-all duration-300" />
+                <img src="@/assets/images/icons/user-secondary-green.svg" alt="icon" class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-0 peer-placeholder-shown:opacity-100 transition-all duration-300" />
+                <img src="@/assets/images/icons/user-black.svg" alt="icon" class="absolute shrink-0 size-6 top-1/2 left-4 -translate-y-1/2 opacity-100 peer-placeholder-shown:opacity-0 transition-all duration-300" />
             </div>
         </div>
         <span class="text-left text-[12px] text-red-500" v-if="errorMessage">
