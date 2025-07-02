@@ -31,5 +31,21 @@ export const useEventParticipantStore = defineStore('event-participant', {
             }
         },
 
+        async createEventParticipant(payload) {
+            this.loading = true
+
+            try {
+                const response = await axiosInstance.post('/event-participant', payload)
+
+                this.success = response.data.message
+
+                return response.data.data
+            } catch (error) {
+                this.error = handleError(error)
+            } finally {
+                this.loading = false
+            }
+        },
+
     }
 })
