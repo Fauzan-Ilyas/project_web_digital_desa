@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Interface\FamilyMemberRepositoryInterface; 
+use App\Interfaces\FamilyMemberRepositoryInterface; 
 use App\Models\FamilyMember;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -14,8 +14,8 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
         ?string $search, 
         ?int $limit, 
         bool $execute
-         ) {
-      $query = FamilyMember::where (function ($query) use ($search){
+        ) {
+        $query = FamilyMember::where (function ($query) use ($search){
 
             if($search){
                 $query->search($search);
@@ -35,7 +35,7 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
 
     public function getAllPaginated(
         ?string $search,
-         ?int $rowPerPage
+        ?int $rowPerPage
     ) {
         $query = $this->getAll( 
         $search,
@@ -47,9 +47,9 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
     }
 
     public function getById(
-       string $id
+        string $id
     ) {
-        $query = FamilyMember::where('id, $id')->with('headOfFamily');
+        $query = FamilyMember::where('id', $id)->with('headOfFamily');
         
         return $query->first();
     }
@@ -57,9 +57,9 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
     public function create(
         array $data
     ){
-      DB::beginTransaction();
+        DB::beginTransaction();
 
-      try {
+    try {
         $userRepository = new UserRepository;
 
         $user = $userRepository->create([
@@ -72,7 +72,7 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
         $familyMember->user_id = $user->id;
         $familyMember->head_of_family_id = $data['head_of_family_id'];
         $familyMember->profile_picture = $data['profile_picture']->store('assets/family-members', 'public');
-        $familyMember->identy_number = $data['identy_number'];
+        $familyMember->identity_number = $data['identity_number'];
         $familyMember->gender = $data['gender'];
         $familyMember->date_of_birth = $data['date_of_birth'];
         $familyMember->phone_number = $data['phone_number'];
@@ -84,18 +84,18 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
         DB::commit();
 
         return $familyMember;
-      } catch (\Exception $e) {
+    } catch (\Exception $e) {
         DB::rollBack();
 
         throw new Exception($e->getMessage());
-      }
     }
+}
 
     public function update(
         string $id,
         array $data
     ) {
-         DB::beginTransaction();
+        DB::beginTransaction();
 
         try {
             $familyMember = familyMember::find($id);
@@ -104,7 +104,7 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
                 $familyMember->profile_picture = $data['profile_picture']->store('assets/family-members', 'public');
             }
             
-            $familyMember->identy_number = $data['identy_number'];
+            $familyMember->identity_number = $data['identity_number'];
             $familyMember->gender = $data['gender'];
             $familyMember->date_of_birth = $data['date_of_birth'];
             $familyMember->phone_number = $data['phone_number'];
@@ -134,16 +134,16 @@ class FamilyMemberRepository implements FamilyMemberRepositoryInterface
     public function delete(
         string $id
     ) {
-       DB::beginTransaction();
+        DB::beginTransaction();
 
-       try {
-           $familyMember = FamilyMember::find($id);
-           $familyMember->delete();
+        try {
+            $familyMember = FamilyMember::find($id);
+            $familyMember->delete();
 
-           DB::commit();
+            DB::commit();
 
-           return $familyMember;
-       } catch (\Exception $e) {
+            return $familyMember;
+        } catch (\Exception $e) {
             DB::rollBack();
 
             throw new Exception ($e->getMessage());

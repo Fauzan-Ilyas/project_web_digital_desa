@@ -4,12 +4,15 @@ namespace App\Repositories;
 
 use App\Interfaces\SocialAssistanceRecipientRepositoryInterface;
 use App\Models\SocialAssistanceRecipient;
-use Exception;
+use Exeception;
 use Illuminate\Support\Facades\DB;
 
 class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRepositoryInterface {
-    public function getAll(?string $search, ?int $limit, bool $execute)
-    {
+    public function getAll(
+        ?string $search, 
+        ?int $limit, 
+        bool $execute
+    ){
         $query = SocialAssistanceRecipient::where(function($query) use ($search) {
             if ($search) {
                 $query->search($search);
@@ -29,26 +32,30 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
         return $query;
     }
 
-    public function getAllPaginated(?string $search, ?int $rowsPerPage)
-    {
+    public function getAllPaginated(
+        ?string $search, 
+        ?int $rowPerPage
+    ){
         $query = $this->getAll(
             $search,
-            $rowsPerPage,
+            $rowPerPage,
             false
         );
 
-        return $query->paginate($rowsPerPage);
+        return $query->paginate($rowPerPage);
     }
 
-    public function getById(string $id)
-    {
+    public function getById(
+        string $id
+    ){
         $query = SocialAssistanceRecipient::where('id', $id);
 
         return $query->first();
     }
 
-    public function create(array $data)
-    {
+    public function create(
+        array $data
+    ){
         DB::beginTransaction();
 
         try {
@@ -76,13 +83,15 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
         } catch (\Exception $e) {
             DB::rollBack();
 
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
-    public function update(string $id, array $data) 
-    {
-         DB::beginTransaction();
+    public function update(
+        string $id, 
+        array $data
+    ){
+        DB::beginTransaction();
 
         try {
             $socialAssistanceRecipient = SocialAssistanceRecipient::find($id);
@@ -107,15 +116,15 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
 
             return $socialAssistanceRecipient;
         } catch (\Exception $e) {
-            DB::rollBack();
+            DB::roolBack();
 
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
     public function delete(
         string $id
-    ) {
+    ){
         DB::beginTransaction();
 
         try {
@@ -128,7 +137,7 @@ class SocialAssistanceRecipientRepository implements SocialAssistanceRecipientRe
         } catch (\Exception $e) {
             DB::rollBack();
 
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 }

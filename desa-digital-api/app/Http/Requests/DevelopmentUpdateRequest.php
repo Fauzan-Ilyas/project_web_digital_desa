@@ -17,7 +17,7 @@ class DevelopmentUpdateRequest extends FormRequest
             'thumbnail' => 'nullable|image',
             'name' => 'required|string',
             'description' => 'required|string',
-            'person_in_change' => 'required|string',
+            'person_in_charge' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date',
             'amount' => 'required|integer',
@@ -29,12 +29,12 @@ class DevelopmentUpdateRequest extends FormRequest
     {
         return [
             'thumbnail' => 'Thumbnail',
-            'name' => 'Nama',
+            'name' => 'Nama Pembangunan',
             'description' => 'Deskripsi',
-            'person_in_change' => 'Penanggung Jawab',
+            'person_in_charge' => 'Penanggung Jawab',
             'start_date' => 'Tanggal Mulai',
-            'end_date' => 'Tanggal Berakhir',
-            'amount' => 'Jumlah Dana',
+            'end_date' => 'Tanggal Selesai',
+            'amount' => 'Anggaran',
             'status' => 'Status',
         ];
     }

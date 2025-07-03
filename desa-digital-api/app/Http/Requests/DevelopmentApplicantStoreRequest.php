@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class EventParticipantStoreRequest extends FormRequest
+class DevelopmentApplicantStoreRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,18 +14,18 @@ class EventParticipantStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'event_id' => 'required|exists:events,id',
-            'head_of_family_id' => 'required|exists:head_of_families,id',
-            'quantity' => 'required|integer'
+            'development_id' => 'required|exists:developments,id',
+            'user_id' => 'required|exists:users,id',
+            'status' => 'nullable|in:pending,approved,rejected',
         ];
     }
 
     public function attributes()
     {
         return [
-            'event_id' => 'Event',
-            'head_of_family_id' => 'Kkepala Keluarga',
-            'quantity' => 'Jumlah'
+            'development_id' => 'Pembangunan',
+            'user_id' => 'Pengguna',
+            'status' => 'Status',
         ];
     }
 }

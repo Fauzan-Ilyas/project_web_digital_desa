@@ -16,13 +16,13 @@ class ProfileStoreRequest extends FormRequest
         return [
             'thumbnail' => 'required|image',
             'name' => 'required|string',
-            'about' => 'nullable|string',
+            'about' => 'required|string',
             'headman' => 'required|string',
             'people' => 'required|integer',
             'agricultural_area' => 'required',
             'total_area' => 'required',
-            'images.*' => 'nullable|array',
-            'images.*' => 'required|image|mimes:png,jpg|max:2048'
+            'images' => 'nullable|array',
+            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
     }
 
@@ -31,11 +31,11 @@ class ProfileStoreRequest extends FormRequest
         return [
             'thumbnail' => 'Thumbnail',
             'name' => 'Nama',
-            'about' => 'Deskripsi',
+            'about' => 'Tentang',
             'headman' => 'Kepala Desa',
             'people' => 'Jumlah Penduduk',
-            'agricultural_area' => 'Luas Pertanian',
-            'total_area' => 'Luas Total',
+            'agricultural_area' => 'Luas Lahan Pertanian',
+            'total_area' => 'Luas Wilayah Total',
             'images' => 'Gambar'
         ];
     }

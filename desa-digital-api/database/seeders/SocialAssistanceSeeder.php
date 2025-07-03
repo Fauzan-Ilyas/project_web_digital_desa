@@ -4,11 +4,12 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\SocialAssistance;
+use Database\Factories\SocialAssistanceFactory;
 
 class SocialAssistanceSeeder extends Seeder
 {
     public function run(): void
     {
-        SocialAssistance::factory()->count(10)->create();
+        SocialAssistanceFactory::new()->count(10)->create();
     }
 }

@@ -19,8 +19,12 @@ class DevelopmentApplicant extends Model
 
     public function scopeSearch($query, $search)
     {
-        return $query->whereHas('user', function($query) use ($search){
-            $query->where('name','like','%'. $search.'%');
+        return $query->whereHas('user', function($request) use ($search) {
+            $request->where('name', 'like', "%{$search}%")
+            ->orWhere('status', 'like', "%{$search}%");
+        //             ->orWhere('email', 'like', "%{$search}%");
+        // })->orWhereHas('development', function($request) use ($search) {
+        //     $request->where('title', 'like', "%{$search}%");
         });
     }
 

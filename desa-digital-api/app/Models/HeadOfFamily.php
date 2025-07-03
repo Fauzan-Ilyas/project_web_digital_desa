@@ -20,7 +20,7 @@ class HeadOfFamily extends Model
         'date_of_birth',
         'phone_number',
         'occupation',
-        'martial_status',
+        'marital_status',
     ];
 
     // ABoy 
@@ -51,6 +51,6 @@ class HeadOfFamily extends Model
 
     public function eventParticipants()
     {
-        return $this->hasMany(EventParticipants::class);
+        return $this->hasMany(EventParticipant::class);
     }
 }

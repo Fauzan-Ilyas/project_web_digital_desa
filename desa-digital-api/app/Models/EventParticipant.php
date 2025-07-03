@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class EventParticipants extends Model
+class EventParticipant extends Model
 {
     use HasFactory, SoftDeletes, UUID;
 
@@ -21,15 +21,15 @@ class EventParticipants extends Model
 
     protected $casts = [
         'quantity' => 'integer',
-        'total_price' => 'decimal:2',
+        'total_price' => 'decimal:2'
     ];
 
-    public function scopeSearch($query, $search)
+        public function scopeSearch($query, $search)
     {
-        return $query->whereHas('headOfFamiliy', function ($query) use ($search){
+        return $query->whereHas('headOfFamily', function ($query) use ($search){
             $query->whereHas('user', function ($query) use ($search){
                 $query->where('name', 'like', '%'.$search.'%');
-                $query->where('email', 'like', '%'.$search.'%');
+                $query->orWhere('email', 'like', '%'.$search.'%');
             });
         });
     }

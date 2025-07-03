@@ -6,7 +6,7 @@ interface DevelopmentRepositoryInterface
 {
     public function getAll(
         ?string $search,
-        ?string $limit,
+        ?int $limit,
         bool $execute
     );
 

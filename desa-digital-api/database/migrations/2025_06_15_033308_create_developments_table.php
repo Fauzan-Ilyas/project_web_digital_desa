@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('name');
             $table->longText('description');
-            $table->string('person_in_change');
+            $table->string('person_in_charge');
             $table->date('start_date');
             $table->date('end_date');
             $table->decimal('amount', 10, 2);
