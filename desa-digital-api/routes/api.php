@@ -10,6 +10,7 @@ use App\Http\Controllers\SocialAssistanceRecipientController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventParticipantController;
 use App\Http\Controllers\DevelopmentController;
+use App\Http\Controllers\DevelopmentApplicantController;
 
 
 Route::apiResource('user', UserController::class);
@@ -35,3 +36,12 @@ Route::get('event-participant/all/paginated', [EventParticipantController::class
 
 Route::apiResource('development', DevelopmentController::class);
 Route::get('development/all/paginated', [DevelopmentController::class, 'getAllPaginated']);
+
+Route::apiResource('development-applicant', DevelopmentApplicantController::class);
+Route::get('development-applicant/all/paginated', [DevelopmentApplicantController::class, 'getAllPaginated']);
+
+// Profile Routes
+use App\Http\Controllers\ProfileController;
+Route::get('profile', [ProfileController::class, 'index']);
+Route::post('profile', [ProfileController::class, 'store']);
+Route::put('profile', [ProfileController::class, 'update']);

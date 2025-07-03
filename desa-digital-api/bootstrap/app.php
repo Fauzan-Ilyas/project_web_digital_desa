@@ -16,7 +16,11 @@ return Application::configure(basePath: dirname(__DIR__))
         RepositoryServiceProvider::class, // 🔥 Tambahkan ini
     ])
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'role' => Spatie\Permission\MiddleWare\RoleMiddleware::class,
+            'permission' => Spatie\Permission\MiddleWare\PermissionMiddleware::class,
+            'role_or_permission' => Spatie\Permission\MiddleWare\RoleOrPermissionMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

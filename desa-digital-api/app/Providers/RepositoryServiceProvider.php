@@ -12,7 +12,9 @@ use App\Interfaces\SocialAssistanceRecipientRepositoryInterface;
 use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\EventParticipantRepositoryInterface;
 use App\Interfaces\DevelopmentRepositoryInterface;
-
+use App\Interfaces\DevelopmentApplicantRepositoryInterface;
+use App\Interfaces\ProfileRepositoryInterface;
+use App\Models\Profile;
 use App\Repositories\UserRepository;
 use App\Repositories\HeadOfFamilyRepository;
 use App\Repositories\FamilyMemberRepository;
@@ -21,6 +23,8 @@ use App\Repositories\SocialAssistanceRecipientRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\EventParticipantRepository;
 use App\Repositories\DevelopmentRepository;
+use App\Repositories\DevelopmentApplicantRepository;
+use App\Repositories\ProfileRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -34,6 +38,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(EventRepositoryInterface::class, EventRepository::class);
         $this->app->bind(EventParticipantRepositoryInterface::class, EventParticipantRepository::class);
         $this->app->bind(DevelopmentRepositoryInterface::class, DevelopmentRepository::class);
+        $this->app->bind(DevelopmentApplicantRepositoryInterface::class, DevelopmentApplicantRepository::class);
+        $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
     }
 
     public function boot(): void

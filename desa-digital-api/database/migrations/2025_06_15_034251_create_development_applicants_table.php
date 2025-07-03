@@ -19,7 +19,7 @@ return new class extends Migration
             
             $table->uuid('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->enum('status', ['padding', 'approved', 'rejected'])->default('padding');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 
             $table->softDeletes();
             $table->timestamps();
