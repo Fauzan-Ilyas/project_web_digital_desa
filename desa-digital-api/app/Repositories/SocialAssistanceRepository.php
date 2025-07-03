@@ -17,7 +17,7 @@ class SocialAssistanceRepository implements SocialAssistanceRepositoryInterface
             if ($search) {
                 $query->search($search);
             }
-        });
+        })->with('socialAssistanceRecipients');
 
         if ($limit) {
             $query->take($limit);
