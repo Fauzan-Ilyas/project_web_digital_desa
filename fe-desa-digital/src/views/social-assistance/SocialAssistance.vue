@@ -2,11 +2,11 @@
 import ModalDelete from '@/components/ui/ModalDelete.vue';
 import { formatRupiah, formatToClientTimezone } from '@/helpers/format';
 import  router  from '@/router';
-import { useSosialAssistanceStore } from '@/stores/socialAssistance';
+import { useSocialAssistanceStore } from '@/stores/socialAssistance';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
-import { useSosialAssistanceRecipientStore } from '@/stores/socialAssistanceRecipient';
+import { useSocialAssistanceRecipientStore } from '@/stores/socialAssistanceRecipient';
 import { useAuthStore } from '@/stores/auth';
 
 
@@ -22,11 +22,11 @@ const socialAssistanceRecipient = ref({
 });
 
 
-const socialAssistanceStore = useSosialAssistanceStore();
+const socialAssistanceStore = useSocialAssistanceStore();
 const { loading, error, success } = storeToRefs(socialAssistanceStore)
 const { fetchSocialAssistance, deleteSocialAssistance } = socialAssistanceStore
 
-const sosialAssistanceRecipientStore = useSosialAssistanceRecipientStore();
+const sosialAssistanceRecipientStore = useSocialAssistanceRecipientStore();
 const { createSosialAssistanceRecipient } = sosialAssistanceRecipientStore
 
 const authStore = useAuthStore();

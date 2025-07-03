@@ -1,6 +1,6 @@
 <script setup>
 import router from '@/router';
-import { useHeadOfFamilyStore } from '@/stores/headOfFamily.js';
+import { useHeadOfFamilyStore } from '@/stores/headOfFamily';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';

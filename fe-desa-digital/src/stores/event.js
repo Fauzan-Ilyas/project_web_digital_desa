@@ -3,7 +3,7 @@ import { axiosInstance } from "@/plugins/axios";
 import { handleError } from "@/helpers/errorHelper";
 import router from "@/router";
 
-export const useEvenStore = defineStore("event", {
+export const useEventStore = defineStore("event", {
   state: () => ({
     events: {
       meta: {
@@ -20,7 +20,7 @@ export const useEvenStore = defineStore("event", {
   }),
 
   actions: {
-    async fetchevEntsPaginated(params) {
+    async fetchEventPaginated(params) {
       this.loading = true;
 
       try {

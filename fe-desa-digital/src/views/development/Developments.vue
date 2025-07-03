@@ -5,7 +5,7 @@ import { storeToRefs } from "pinia";
 import { onMounted, ref, watch } from "vue";
 import { debounce } from "lodash";
 import Pagination from "@/components/ui/Pagination.vue";
-import { can } from "@/helpers/permissionsHelper";
+import { can } from "@/helpers/permissionHelper";
 import { useAuthStore } from "@/stores/auth";
 
 const developmentStore = useDevelopmentStore();

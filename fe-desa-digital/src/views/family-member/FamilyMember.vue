@@ -1,5 +1,5 @@
 <script setup>
-import { router } from '@/router';
+import router from '@/router';
 import { useFamilyMemberStore } from '@/stores/familyMember';
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue';

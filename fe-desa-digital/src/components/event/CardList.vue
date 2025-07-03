@@ -1,6 +1,6 @@
 <script setup>
 import { formatRupiah } from '@/helpers/format';
-import { useAuthStore } from '@/strores/auth';
+import { useAuthStore } from '@/stores/auth';
 import { storeToRefs } from 'pinia';
 
 const authStore = useAuthStore()

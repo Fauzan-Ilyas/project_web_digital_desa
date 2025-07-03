@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserUpdateRequest;
-use App\Http\Requests\UserStroreRequest;
+use App\Http\Requests\UserStoreRequest;
 use App\Http\Resources\PaginateResource;
 use App\Http\Resources\UserResource;
 use App\Helpers\ResponseHelper;
@@ -51,7 +51,7 @@ class UserController extends Controller
                 $request['row_per_page']
             );
 
-            return ResponseHelper::jsonResponse(true, 'User Berhasil diambil', PaginateResource::make, 200);
+            return ResponseHelper::jsonResponse(true, 'User Berhasil diambil', new PaginateResource($users), 200);
         } catch(\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -60,7 +60,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserStroreRequest $request)
+    public function store(UserStoreRequest $request)
     {
         $request = $request->validated();
 

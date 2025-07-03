@@ -6,12 +6,14 @@ interface DevelopmentRepositoryInterface
 {
     public function getAll(
         ?string $search,
+        ?string $status,
         ?string $limit,
         bool $execute
     );
 
     public function getAllPaginated(
         ?string $search,
+        ?string $status,
         ?int $rowPerPage
     );
 

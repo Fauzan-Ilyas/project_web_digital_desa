@@ -1,7 +1,6 @@
 <script setup>
-import { useprofileStore } from "@/stores/profile";
+import { useProfileStore } from "@/stores/profile";
 import { can } from "@/helpers/permissionHelper";
-import { profileStore } from "@/stores/profile";
 import { create } from "lodash";
 import { storeToRefs } from "pinia";
 import { onMounted } from "vue";

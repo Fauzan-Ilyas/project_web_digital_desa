@@ -80,9 +80,9 @@ const handleSubmit = async () => {
                     </div>
                 </div>
             </section>
-</template>
+</template> -->
 
- -->
+
 
 
 <script setup>
@@ -136,7 +136,6 @@ const handleSubmit = async () => {
         </div>
       </header>
 
-      <!-- Role Select (visual aja, belum dipakai login logicnya) -->
       <section id="Select" class="grid grid-cols-2 gap-6">
         <div class="group relative flex items-center justify-between p-5 rounded-2xl bg-white ring-[1px] ring-desa-background hover:bg-desa-foreshadow has-[:checked]:bg-desa-foreshadow has-[:checked]:ring-desa-dark-green transition-all duration-300">
           <input id="Kepala-Desa" required type="radio" name="role" class="peer absolute inset-0 z-50 opacity-0" />
@@ -156,7 +155,6 @@ const handleSubmit = async () => {
         </div>
       </section>
 
-      <!-- input email & password -->
       <section id="Inputs" class="flex flex-col gap-[32px]">
         <div id="Email-Address" class="flex flex-col gap-4">
           <h2 class="font-medium leading-5 text-desa-secondary">Email Address</h2>
@@ -192,7 +190,6 @@ const handleSubmit = async () => {
     </div>
   </form>
 
-  <!-- banner kanan -->
   <section id="Banner" class="relative flex w-full max-w-[634px]">
     <div class="fixed top-0 h-screen w-full max-w-[634px] overflow-hidden pr-3 py-3">
       <div class="h-full w-[622px] rounded-3xl gradient-vertical pt-[59px] pb-[60px]">

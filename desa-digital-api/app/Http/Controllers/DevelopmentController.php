@@ -28,6 +28,7 @@ class DevelopmentController extends Controller
         try {
             $developments = $this->developmentRepository->getAll(
                 $request->search,
+                $request->status,
                 $request->limit,
                 true
             );
@@ -42,12 +43,14 @@ class DevelopmentController extends Controller
     {
         $request = $request->validated([
             'search' => 'nullable|string',
+            'status' => 'nullable|string',
             'row_per_page' => 'required|integer'
         ]);
 
         try {
             $events = $this->developmentRepository->getAllPaginated(
                 $request['search'] ?? null,
+                $request ['status'] ?? null,
                 $request['row_per_page'],
             );
 

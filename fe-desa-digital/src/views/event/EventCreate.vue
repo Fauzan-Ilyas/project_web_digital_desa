@@ -13,7 +13,7 @@ import IconCalendarSecondaryGreen from '@/assets/images/icons/calendar-2-seconda
 import IconCalendarBlack from '@/assets/images/icons/calendar-2-black.svg'
 import IconDollarSquareSecondaryGreen from '@/assets/images/icons/dollar-square-secondary-green.svg'
 import IconDollarSquareBlack from '@/assets/images/icons/dollar-square-black.svg'
-import Input from '@/components/ui/Input.vue'
+import Input from '@/components/ui/input.vue'
 
 
     const event = ref({

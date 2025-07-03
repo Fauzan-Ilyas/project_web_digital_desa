@@ -34,8 +34,6 @@ import Event from "@/views/event/Event.vue";
 import EventEdit from "@/views/event/EventEdit.vue";
 import EventCreate from "@/views/event/EventCreate.vue";
 
-import Error403 from "@/views/Error403.vue";
-import NotFound from "@/views/NotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -202,8 +200,6 @@ const router = createRouter({
         },
       ],
     },
-    { path: "/403", name: "Error403", component: Error403 },
-    { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
   ],
 });
 

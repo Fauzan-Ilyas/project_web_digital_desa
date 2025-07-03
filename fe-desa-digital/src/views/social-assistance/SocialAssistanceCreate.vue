@@ -1,5 +1,5 @@
 <script setup>
-import { useSosialAssistanceStore } from "@/stores/socialAssistance";
+import { useSocialAssistanceStore } from "@/stores/socialAssistance";
 import { storeToRefs } from "pinia";
 import { onMounted, ref, watch } from "vue";
 
@@ -10,7 +10,7 @@ import IconDollarSquareBlack from "@/assets/images/icons/dollar-square-black.svg
 import IconProfileSecondaryGreen from "@/assets/images/icons/user-secondary-green.svg";
 import IconProfileBlack from "@/assets/images/icons/user-black.svg";
 
-import Input from "@/components/ui/Input.vue";
+import Input from "@/components/ui/input.vue";
 import { formatRupiah, parseRupiah } from "@/helpers/format";
 
 const socialAssistance = ref({
@@ -25,7 +25,7 @@ const socialAssistance = ref({
   is_available: true,
 });
 
-const socialAssistanceStore = useSosialAssistanceStore();
+const socialAssistanceStore = useSocialAssistanceStore();
 const { loading, error } = storeToRefs(socialAssistanceStore);
 const { createSocialAssistance } = socialAssistanceStore;
 
