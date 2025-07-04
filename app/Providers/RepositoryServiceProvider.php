@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+// Interfaces
 use App\Interfaces\UserRepositoryInterface;
 use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use App\Interfaces\FamilyMemberRepositoryInterface;
@@ -14,7 +15,9 @@ use App\Interfaces\EventParticipantRepositoryInterface;
 use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Interfaces\DevelopmentApplicantRepositoryInterface;
 use App\Interfaces\ProfileRepositoryInterface;
-use App\Models\Profile;
+use App\Interfaces\DashboardRepositoryInterface;
+
+// Repositories
 use App\Repositories\UserRepository;
 use App\Repositories\HeadOfFamilyRepository;
 use App\Repositories\FamilyMemberRepository;
@@ -25,6 +28,8 @@ use App\Repositories\EventParticipantRepository;
 use App\Repositories\DevelopmentRepository;
 use App\Repositories\DevelopmentApplicantRepository;
 use App\Repositories\ProfileRepository;
+use App\Repositories\AuthRepository;
+use App\Repositories\DashboardRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -40,6 +45,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(DevelopmentRepositoryInterface::class, DevelopmentRepository::class);
         $this->app->bind(DevelopmentApplicantRepositoryInterface::class, DevelopmentApplicantRepository::class);
         $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
+        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
+        $this->app->bind(DashboardRepositoryInterface::class, DashboardRepository::class);
     }
 
     public function boot(): void

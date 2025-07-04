@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface SocialAssistanceRecipientRepositoryInterface
+interface EvenParticipantRepositoryInterface
 {
     public function getAll(
         ?string $search,
@@ -10,15 +10,15 @@ interface SocialAssistanceRecipientRepositoryInterface
         bool $execute
     );
 
-    public function getAllPaginated(
+    public function getAllPaginate(
         ?string $search,
-        ?int $rowPerPage,
+        ?int $rowPerPage
     );
 
     public function getById(
         string $id
     );
-    
+
     public function create(
         array $data
     );

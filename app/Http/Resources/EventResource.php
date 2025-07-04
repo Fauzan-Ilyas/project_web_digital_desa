@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\EventParticipantResource;
 
 class EventResource extends JsonResource
 {
@@ -16,13 +17,14 @@ class EventResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'thumbnail' => $this->thumbnail,
+            'thumbnail' => asset('storage/' . $this->thumbnail),
             'name' => $this->name,
             'description' => $this->description,
             'price' => (float)(string) $this->price,
             'date' => $this->date,
             'time' => $this->time,
-            'is_active' => $this->is_active
+            'is_active' => $this->is_active,
+            'event_participants' => EventParticipantResource::collection($this->whenLoaded('eventParticipants'))
         ];
     }
 }
