@@ -2,34 +2,35 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use App\Repositories\AuthRepository;
 
 // Interfaces
+use App\Repositories\UserRepository;
+use App\Repositories\EventRepository;
+use App\Repositories\ProfileRepository;
+use Illuminate\Support\ServiceProvider;
+use App\Repositories\DashboardRepository;
+use App\Interfaces\AuthRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
-use App\Interfaces\HeadOfFamilyRepositoryInterface;
-use App\Interfaces\FamilyMemberRepositoryInterface;
-use App\Interfaces\SocialAssistanceRepositoryInterface;
-use App\Interfaces\SocialAssistanceRecipientRepositoryInterface;
+use App\Repositories\DevelopmentRepository;
 use App\Interfaces\EventRepositoryInterface;
-use App\Interfaces\EventParticipantRepositoryInterface;
-use App\Interfaces\DevelopmentRepositoryInterface;
-use App\Interfaces\DevelopmentApplicantRepositoryInterface;
-use App\Interfaces\ProfileRepositoryInterface;
-use App\Interfaces\DashboardRepositoryInterface;
+use App\Repositories\FamilyMemberRepository;
+use App\Repositories\HeadOfFamilyRepository;
 
 // Repositories
-use App\Repositories\UserRepository;
-use App\Repositories\HeadOfFamilyRepository;
-use App\Repositories\FamilyMemberRepository;
-use App\Repositories\SocialAssistanceRepository;
-use App\Repositories\SocialAssistanceRecipientRepository;
-use App\Repositories\EventRepository;
+use App\Interfaces\ProfileRepositoryInterface;
+use App\Interfaces\DashboardRepositoryInterface;
 use App\Repositories\EventParticipantRepository;
-use App\Repositories\DevelopmentRepository;
+use App\Repositories\SocialAssistanceRepository;
+use App\Interfaces\DevelopmentRepositoryInterface;
+use App\Interfaces\FamilyMemberRepositoryInterface;
+use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use App\Repositories\DevelopmentApplicantRepository;
-use App\Repositories\ProfileRepository;
-use App\Repositories\AuthRepository;
-use App\Repositories\DashboardRepository;
+use App\Interfaces\EventParticipantRepositoryInterface;
+use App\Interfaces\SocialAssistanceRepositoryInterface;
+use App\Repositories\SocialAssistanceRecipientRepository;
+use App\Interfaces\DevelopmentApplicantRepositoryInterface;
+use App\Interfaces\SocialAssistanceRecipientRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
