@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class FamilyMemberResourceFactory extends Factory
+class FamilyMemberFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -22,8 +22,8 @@ class FamilyMemberResourceFactory extends Factory
             'gender' => $this->faker->randomElement(['male', 'female']),
             'date_of_birth' => $this->faker->dateTimeBetween('-60 years', 'now'),
             'phone_number' => $this->faker->unique()->phoneNumber(),
-            'accupation' => $this->faker->jobTitle(),
-            'marital_status' => $this->faker->randomElement(['Married', 'Single']),
+            'occupation' => $this->faker->jobTitle(),
+            'marital_status' => $this->faker->randomElement(['married', 'single']),
             'relation' =>  $this->faker->randomElement(['wife', 'child', 'husband'])
         ];
     }

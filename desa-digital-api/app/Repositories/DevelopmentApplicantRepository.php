@@ -4,41 +4,44 @@ namespace App\Repositories;
 
 use App\Interfaces\DevelopmentApplicantRepositoryInterface;
 use App\Models\DevelopmentApplicant;
+use Illuminate\Support\Facades\DB;
 
-class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryInterface
+class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryInterface 
 {
     public function getAll(
         ?string $search,
         ?int $limit,
-        bool $execute 
+        bool $execute
     ) {
-        $query = DevelopmentApplicant::where(function($query) use ($search){
-        if($search){
-            $query->search($search);
-          }
-       });
+        $query = DevelopmentApplicant::where(function ($query) use ($search){
+            if ($search) {
+                $query->search($search);
+            }
+        });
 
-       $query->orderBy('created_at', 'desc');
+        $query->orderBy('created_at', 'desc');
 
-       if($limit) {
-        $query->take($limit);
-       }
- 
-       if($execute){
-          return $query->get();
-       }
+        if ($limit) {
+            $query->take($limit);
+        }
 
-       return $query;
-    } 
+        if ($execute) {
+            return $query->get();
+        }
+
+        return $query;
+    }
 
     public function getAllPaginated(
         ?string $search,
         ?int $rowPerPage
-    ){
+    ) {
         $query = $this->getAll(
-
+            $search,
+            $rowPerPage,
+            false
         );
-        
+
         return $query->paginate($rowPerPage);
     }
 
@@ -56,40 +59,13 @@ class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryIn
         DB::beginTransaction();
 
         try {
-            $developmentApplicant = new DevelopmentApplicant;
-            $developmentApplicant->development_id = $data['development_id'];
-            $developmentApplicant->user_id = $data['user_id'];
-
+            $developmentApplicant = new DevelopmentApplicant;            
+            $developmentApplicant->development_id = $data['development_id'];            
+            $developmentApplicant->user_id = $data['user_id'];            
+            
             if (isset($data['status'])) {
-                $developmentApplicant->status=$data['status'];
+                $developmentApplicant->status = $data['status'];
             }
-
-            $developmentApplicant->save();
-
-            DB::commit();
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            throw new Exception($e->getMessage());
-        }
-    }
-
-    public function update(
-        string $id,
-        array $data
-    ) {
-        DB::beginTransaction();
-
-        try {
-            $developmentApplicant = DevelopmentApplicant::find($id);
-            $developmentApplicant->development_id = $data['development_id'];
-            $developmentApplicant->user_id = $data['user_id'];
-
-            if (isset($data['status'])) {
-                $developmentApplicant->status=$data['status'];
-            }
-
             $developmentApplicant->save();
 
             DB::commit();
@@ -98,12 +74,38 @@ class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryIn
         } catch (\Exception $e) {
             DB::rollBack();
 
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());  
+        }
+    }
+
+    public function update(
+        string $id,
+        array $data
+    ){
+        DB::beginTransaction();
+
+        try {
+            $developmentApplicant = DevelopmentApplicant::find($id);            
+            $developmentApplicant->development_id = $data['development_id'];            
+            $developmentApplicant->user_id = $data['user_id'];            
+            
+            if (isset($data['status'])) {
+                $developmentApplicant->status = $data['status'];
+            }
+            $developmentApplicant->save();
+
+            DB::commit();
+
+            return $developmentApplicant;
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            throw new \Exception($e->getMessage());  
         }
     }
 
     public function delete(
-        string $id,
+        string $id
     ) {
         DB::beginTransaction();
 
@@ -117,7 +119,7 @@ class DevelopmentApplicantRepository implements DevelopmentApplicantRepositoryIn
         } catch (\Exception $e) {
             DB::rollBack();
 
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());  
         }
     }
 }

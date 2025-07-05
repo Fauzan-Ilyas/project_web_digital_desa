@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\FamilyMember;
 use App\Models\HeadOfFamily;
 use App\Models\SocialAssistance;
+use App\Interfaces\DashboardRepositoryInterface;
 
 class DashboardRepository implements DashboardRepositoryInterface
 {

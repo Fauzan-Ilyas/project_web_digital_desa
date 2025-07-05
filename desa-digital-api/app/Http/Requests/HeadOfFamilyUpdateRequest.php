@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\HeadOfFamily;
 
 class HeadOfFamilyUpdateRequest extends FormRequest
 {
@@ -19,26 +20,26 @@ class HeadOfFamilyUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'email' => 'nullable|string|email|unique:users,email,' . HeadOfFamily::find($this->route('head_of_family'))->user_id,
+            'email' => 'nullable|string|email|max:255|unique:users,email,' . HeadOfFamily::find($this->route('head_of_family'))->user_id,
             'password' => 'nullable|string|min:8',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'identy_number' => 'required|integer',
-            'gender' => 'required|string|in:Male,Female',
+            'identity_number' => 'required|integer',
+            'gender' => 'required|string|in:male,female',
             'date_of_birth' => 'required|date',
             'phone_number' => 'required|string|',
             'occupation' => 'required|string|',
-            'marital_status' => 'required|string|in:Married,Single',
+            'marital_status' => 'required|string|in:married,single',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => 'Name',
+            'name' => 'Nama',
             'email' => 'Email',
-            'password' => 'Password',
+            'password' => 'Kata Sandi',
             'profile_picture' => 'Foto Profil',
-            'identy_number' => 'identy_number',
+            'identity_number' => 'Nomor Identitas',
             'gender' => 'Jenis Kelamin',
             'phone_number' => 'Nomor Telepon',
             'occupation' => 'Pekerjaan',

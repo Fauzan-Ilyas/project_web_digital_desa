@@ -9,11 +9,13 @@ class SocialAssistanceFactory extends Factory
     public function definition(): array
     {
         return [
-            'thumbnail' => $this->faker->imageUrl(640, 480, 'social', true, 'Bantuan'), // tambahin ini
-            'name' => $this->faker->words(2, true),
-            'description' => $this->faker->sentence(10),
-            'amount' => $this->faker->numberBetween(1000, 100000),
-            'provider' => $this->faker->company(),
+            'thumbnail' => $this->faker->imageUrl(), // tambahin ini
+            'name' => $this->faker->randomElement(['Bantuan Pangan', 'Bantuan Tunai', 'Bantuan Bahan Bakar Bersubsidi', 'Bantuan Kesehatan']) . '' . $this->faker->company,
+            'category' => $this->faker->randomElement(['staple', 'cash', 'subsidized fuel', 'health']),
+            'amount' => $this->faker->randomFloat(2, 100000, 1000000),
+            'provider' => $this->faker->company,
+            'description' => $this->faker->sentence,
+            'is_available' => $this->faker->randomElement([true, false]),
         ];
     }
 }

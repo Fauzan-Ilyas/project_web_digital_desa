@@ -24,10 +24,10 @@ class SocialAssistanceRecipient extends Model
 
     public function scopeSearch($query, $search)
     {
-        return $query->whereHas('headOfFamiliy', function ($query) use ($search){
+        return $query->whereHas('headOfFamily', function ($query) use ($search){
             $query->whereHas('user', function ($query) use ($search){
                 $query->where('name', 'like', '%'.$search.'%');
-                $query->where('email', 'like', '%'.$search.'%');
+                $query->orWhere('email', 'like', '%'.$search.'%');
             });
         });
     }

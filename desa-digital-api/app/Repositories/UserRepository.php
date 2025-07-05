@@ -2,8 +2,9 @@
 
 namespace App\Repositories;
 
-use App\Interface\UserRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository implements UserRepositoryInterface 
 {
@@ -107,6 +108,11 @@ class UserRepository implements UserRepositoryInterface
 
         try {
             $user = User::find($id);
+
+            if (!$user) {     // kode 
+                throw new \Exception('User not found'); // ini adalah untuk menangani jika user tidak ditemukan
+            } // kode yang tidak ada di tutorial
+
             $user->delete();
 
             DB::commit();

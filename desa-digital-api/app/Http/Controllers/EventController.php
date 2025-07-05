@@ -38,7 +38,7 @@ class EventController extends Controller
 
     public function getAllPaginated(Request $request)
     {
-        $request = $request->validated([
+        $request = $request->validate([
             'search' => 'nullable|string',
             'row_per_page' => 'required|integer'
         ]);
@@ -76,7 +76,7 @@ class EventController extends Controller
      */
     public function show(string $id)
     {
-         try {
+        try {
             $event = $this->eventRepository->getById($id);
 
             if (!$event) {
@@ -96,7 +96,7 @@ class EventController extends Controller
     {
         $request = $request->validated();
 
-         try {
+        try {
             $event = $this->eventRepository->getById($id);
 
             if (!$event) {
@@ -119,7 +119,7 @@ class EventController extends Controller
      */
     public function destroy(string $id)
     {
-         try {
+        try {
             $event = $this->eventRepository->getById($id);
 
             if (!$event) {

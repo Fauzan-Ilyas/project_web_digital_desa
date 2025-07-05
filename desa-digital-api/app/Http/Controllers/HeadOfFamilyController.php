@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\interfaces\HeadOfFamilyRepositoryInterface;
+use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Helpers\ResponseHelper;
+use App\Http\Resources\HeadOfFamilyResource;
+use App\Http\Resources\PaginateResource;
+use App\Http\Requests\HeadOfFamilyStoreRequest;
+use App\Http\Requests\HeadOfFamilyUpdateRequest;
 
 class HeadOfFamilyController extends Controller
 {
@@ -27,20 +32,24 @@ class HeadOfFamilyController extends Controller
                 true
             );
 
+        if (is_null($headOfFamilies)) {
+            return ResponseHelper::jsonResponse(false, 'Data kosong atau tidak ditemukan', [], 404);
+        }
+
             return ResponseHelper::jsonResponse(true, 'Data Kepala Keluarga Berhasil Diambil', HeadOfFamilyResource::collection($headOfFamilies), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(true, 'Data Kepala Keluarga Gagal Diambil', null, 500);
         }
     }
 
-    public function getAllPaginate(Request $request)
+    public function getAllPaginated(Request $request)
     {
-        $request = $request->validasi([
+        $request = $request->validate([
             'search' => 'nullable|string',
             'row_per_page' => 'required|integer'
         ]);
         try {
-            $headOfFamilies = $this->headOfFamilyRepository->getAllPaginate(
+            $headOfFamilies = $this->headOfFamilyRepository->getAllPaginated(
                 $request['search'] ?? null,
                 $request['row_per_page'],
                 true
@@ -53,14 +62,13 @@ class HeadOfFamilyController extends Controller
 
     }
 
-
     
     /**
      * Store a newly created resource in storage.
      */
     public function store(HeadOfFamilyStoreRequest $request)
     {
-        $request = $request->validasi();
+        $request = $request->validated();
             
             try {
                 $headOfFamily = $this->headOfFamilyRepository->create($request);
@@ -99,7 +107,7 @@ class HeadOfFamilyController extends Controller
 
     public function update(HeadOfFamilyUpdateRequest $request,string $id)
     {
-        $request = $request->validasi();
+        $request = $request->validated();
             
             try {
                 $headOfFamily = $this->headOfFamilyRepository->getById(
@@ -110,10 +118,10 @@ class HeadOfFamilyController extends Controller
                 return ResponseHelper::jsonResponse(false, 'Kepala Keluarga Tidak Ditemukan', null, 404);
             }
 
-                $headOfFamily = $this->headOfFamilyRepository->update(
-                    $id,
-                    $request
-                );
+            $headOfFamily = $this->headOfFamilyRepository->update(
+                $id,
+                $request
+            );
 
                 return ResponseHelper::jsonResponse(true, 'Kepala Keluarga Berhasil DiUpdate',new HeadOfFamilyResource($headOfFamily), 200);
             } catch (\Exception $e) {

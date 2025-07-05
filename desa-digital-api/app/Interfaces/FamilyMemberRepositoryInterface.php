@@ -11,12 +11,12 @@ interface FamilyMemberRepositoryInterface
     ); 
 
     public function getAllPaginated(
-       ?string $search,
-       ?int $rowPerPage
+        ?string $search,
+        ?int $rowPerPage
     );
     
     public function getById(
-       string $id
+        string $id
     );
 
     public function create (

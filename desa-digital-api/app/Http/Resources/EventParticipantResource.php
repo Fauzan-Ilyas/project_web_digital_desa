@@ -4,7 +4,6 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Models\HeadOfFamily;
 
 class EventParticipantResource extends JsonResource
 {
@@ -17,10 +16,10 @@ class EventParticipantResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'even' => new EventResource($this->event),
-            'head_of_family' => new HeadOfFamily($this->headOfFamily),
+            'event' => new EventResource($this->event),
+            'head_of_family_id' => new HeadOfFamilyResource($this->headOfFamily),
             'quantity' => $this->quantity,
-            'total_price' => (float)(string)$this->total_price,
+            'total_price' => (float)(string) $this->total_price,
             'payment_status' => $this->payment_status
         ];
     }

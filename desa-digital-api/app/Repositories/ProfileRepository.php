@@ -15,7 +15,7 @@ class ProfileRepository implements ProfileRepositoryInterface
 
     public function create(
         array $data
-    ){
+    ) {
         DB::beginTransaction();
 
         try {
@@ -28,14 +28,14 @@ class ProfileRepository implements ProfileRepositoryInterface
             $profile->agricultural_area = $data['agricultural_area'];
             $profile->total_area = $data['total_area'];
 
-            if(array_key_exists('images', $data)){
-                foreach($data['images'] as $image) {
-                    $profile->ProfileImages()->create([
+
+            if(array_key_exists('image', $data)) {
+                foreach($data['image'] as $image) {
+                    $profile->profileImages()->create([
                         'image' => $image->store('assets/profiles', 'public')
                     ]);
                 }
             }
-
             $profile->save();
 
             DB::commit();
@@ -43,19 +43,19 @@ class ProfileRepository implements ProfileRepositoryInterface
             return $profile;
         } catch (\Exception $e) {
             DB::rollBack();
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 
     public function update(
         array $data
-    ){
+    ) {
         DB::beginTransaction();
 
         try {
             $profile = Profile::first();
 
-            if (isset($data['thumbnail'])) {
+            if(isset($data['thumbnail'])){
                 $profile->thumbnail = $data['thumbnail']->store('assets/profiles', 'public');
             }
 
@@ -66,14 +66,14 @@ class ProfileRepository implements ProfileRepositoryInterface
             $profile->agricultural_area = $data['agricultural_area'];
             $profile->total_area = $data['total_area'];
 
-            if(array_key_exists('images', $data)){
-                foreach($data['images'] as $image) {
-                    $profile->ProfileImages()->create([
+
+            if(array_key_exists('image', $data)) {
+                foreach($data['image'] as $image) {
+                    $profile->profileImages()->create([
                         'image' => $image->store('assets/profiles', 'public')
                     ]);
                 }
             }
-
             $profile->save();
 
             DB::commit();
@@ -81,7 +81,7 @@ class ProfileRepository implements ProfileRepositoryInterface
             return $profile;
         } catch (\Exception $e) {
             DB::rollBack();
-            throw new Exception($e->getMessage());
+            throw new \Exception($e->getMessage());
         }
     }
 }

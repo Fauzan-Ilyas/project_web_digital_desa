@@ -6,29 +6,21 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DevelopmentApplicantUpdateRequest extends FormRequest
 {
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function toArray(Request $request): array
+    public function rules(): array
     {
         return [
             'development_id' => 'required|exists:developments,id',
             'user_id' => 'required|exists:users,id',
-            'status' => 'required|in:pending,approved,rejected'
+            'status' => 'required|in:pending,approved,rejected',
         ];
     }
 
-    public function attributes(
-
-    ){
+    public function attributes()
+    {
         return [
-            'development_id' => 'pembangunan',
-            'user_id' => 'User', 
-            'status' => 'Status'
+            'development_id' => 'Pembangunan',
+            'user_id' => 'Pengguna',
+            'status' => 'Status',
         ];
     }
 }
- 

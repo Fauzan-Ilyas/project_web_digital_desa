@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Helpers\ResponseHelper;
-use App\Http\Resources\DevelopmentResource;
-use App\Http\Resources\PaginateResource;
 use App\Http\Requests\DevelopmentStoreRequest;
 use App\Http\Requests\DevelopmentUpdateRequest;
+use App\Http\Resources\DevelopmentResource;
+use App\Http\Resources\PaginateResource;
 use App\Models\Development;
 use Illuminate\Http\Request;
 
@@ -41,20 +41,20 @@ class DevelopmentController extends Controller
 
     public function getAllPaginated(Request $request)
     {
-        $request = $request->validated([
+        $request = $request->validate([
             'search' => 'nullable|string',
             'status' => 'nullable|string',
             'row_per_page' => 'required|integer'
         ]);
 
         try {
-            $events = $this->developmentRepository->getAllPaginated(
+            $developments = $this->developmentRepository->getAllPaginated(
                 $request['search'] ?? null,
                 $request ['status'] ?? null,
                 $request['row_per_page'],
             );
 
-            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Diambil', PaginateResource::make($events, DevelopmentResource::class), 200);
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Diambil', PaginateResource::make($developments, DevelopmentResource::class), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -70,7 +70,7 @@ class DevelopmentController extends Controller
         try {
             $development = $this->developmentRepository->create($request);
 
-            return ResponseHelper::jsonResponse(true, 'Pembangunan Berhasil Ditambahkan', new DevelopmentResource($development), 201);
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Dibuat', new DevelopmentResource($development), 201);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -81,11 +81,11 @@ class DevelopmentController extends Controller
      */
     public function show(string $id)
     {
-         try {
+        try {
             $development = $this->developmentRepository->getById($id);
 
             if (!$development) {
-                return ResponseHelper::jsonResponse(true, 'Data Pembangunan Tidak Ditemukan', null, 404);
+                return ResponseHelper::jsonResponse(false, 'Data Pembangunan Tidak Ditemukan', null, 404);
             }
 
             return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Diambil', new DevelopmentResource($development), 200);
@@ -100,12 +100,11 @@ class DevelopmentController extends Controller
     public function update(DevelopmentUpdateRequest $request, string $id)
     {
         $request = $request->validated();
-
         try {
             $development = $this->developmentRepository->getById($id);
 
             if (!$development) {
-                return ResponseHelper::jsonResponse(true, 'Data Pembangunan Tidak Ditemukan', null, 404);
+                return ResponseHelper::jsonResponse(false, 'Data Pembangunan Tidak Ditemukan', null, 404);
             }
 
             $development = $this->developmentRepository->update($id, $request);
@@ -125,12 +124,12 @@ class DevelopmentController extends Controller
             $development = $this->developmentRepository->getById($id);
 
             if (!$development) {
-                return ResponseHelper::jsonResponse(true, 'Data Pembangunan Tidak Ditemukan', null, 404);
+                return ResponseHelper::jsonResponse(false, 'Data Pembangunan Tidak Ditemukan', null, 404);
             }
 
             $this->developmentRepository->delete($id);
 
-            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Dihapus', null, 200);
+            return ResponseHelper::jsonResponse(true, 'Data Pembangunan Berhasil Dihapus', null , 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }

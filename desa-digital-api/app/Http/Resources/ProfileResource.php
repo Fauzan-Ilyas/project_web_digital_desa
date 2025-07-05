@@ -15,14 +15,14 @@ class ProfileResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'thumbnail' => asset('storage/' . $this->thumbnail),
+            'thumbnail' => $this->thumbnail,
             'name' => $this->name,
             'about' => $this->about,
             'headman' => $this->headman,
             'people' => $this->people,
-            'agricultural_area' => (float)(string)$this->agricultural_area,
+            'agricultural_area' =>(float)(string)$this->agricultural_area,
             'total_area' => (float)(string)$this->total_area,
-            'profile_images' => profileImageResource::collection($this->ProfileImages)
+            'profile_images' => ProfileImageResource::collection($this->profileImages),
         ];
     }
 }

@@ -7,7 +7,7 @@ namespace Database\Seeders;
 
 
 use Illuminate\Database\Seeder;
-
+use Database\Factories\UserFactory;
 use App\Models\User;
 
 
@@ -25,8 +25,13 @@ class UserSeeder extends Seeder
     public function run(): void
 
     {
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@desa.com',
+            'password' => bcrypt('password')
+        ])->assignRole('admin');
 
-        User::factory()->count(15)->create();
+        UserFactory::new()->count(15)->create();
 
     }
 
